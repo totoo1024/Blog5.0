@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="db\管理系统设计.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\BlogManage\Data\" />
     <Folder Include="Areas\BlogManage\Models\" />
     <Folder Include="Areas\CompanyManag\Data\" />
