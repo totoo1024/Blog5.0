@@ -5,8 +5,8 @@
 
 #### 软件架构
 网站使用的是.net core 2.2开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（相关日志已经记录到数据库，没有做展示页面），时间有限，相关优化还没有来得及做，如基本缓存功能还未实现，后期有时间会一一加入进来，做一个整理
-[博客地址](http://www.miboxapp.com)
-[后台地址](http://[输入链接说明](http://www.miboxapp.com))
+[博客地址](http://www.miboxapp.com) http://www.miboxapp.com
+[后台地址](http://[输入链接说明](http://www.miboxapp.com/main)) http://www.miboxapp.com/main
 后台登录用户名/密码：root/123456
  :grin: 由于博客已经正式上线，所以只开放了预览权限
 
