@@ -1,0 +1,15 @@
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\libgdiplus.so
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.IServices.deps.json
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.IServices.dll
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.IServices.pdb
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.Common.dll
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.Entities.dll
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.Common.pdb
+D:\资料\AppCore\App.IServices\bin\Release\netcoreapp2.2\App.Entities.pdb
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.csprojAssemblyReference.cache
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.csproj.CoreCompileInputs.cache
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.AssemblyInfoInputs.cache
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.AssemblyInfo.cs
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.csproj.CopyComplete
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.dll
+D:\资料\AppCore\App.IServices\obj\Release\netcoreapp2.2\App.IServices.pdb

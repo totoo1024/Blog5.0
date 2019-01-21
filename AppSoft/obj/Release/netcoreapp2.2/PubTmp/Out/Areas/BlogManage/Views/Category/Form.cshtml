@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "新增/编辑栏目";
+}
+@section css{
+    <link href="~/js/treeSelect/treeselect.css" rel="stylesheet" />
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">栏目名称</label>
+    <div class="layui-input-block">
+        <input type="text" name="CategoryName" class="layui-input" lay-verify="required" placeholder="请输入栏目名称">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">上级栏目</label>
+    <div class="layui-input-block">
+        <input type="text" name="ParentId" autocomplete="off" id="ParentId" class="layui-input" lay-verify="required" placeholder="请选择上级栏目">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="EnabledMark" value="1" lay-skin="switch" lay-text="启用|禁用" checked>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item  layui-form-text">
+    <label class="layui-form-label">简介</label>
+    <div class="layui-input-block">
+        <textarea name="Description" placeholder="请输入简介" class="layui-textarea"></textarea>
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'treeselect', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, treeselect = layui.treeselect, tools = layui.tools;
+
+            var key = tools.queryString("key");
+            if (key) {
+                var parm = [{ url: "/BlogManage/Category/Detail?key=" + key }, { url: "/BlogManage/Category/Tree" }];
+                tools.requestAll(parm, function (data1, data2) {
+                    data1.EnabledMark = data1.EnabledMark ? 1 : 0;
+                    form.val("form", data1);
+                    initSelect(data2);
+                });
+            } else {
+                //初始化下拉框
+                initSelect();
+                setTimeout(function () {
+                    $("#selecttree_ParentId a").click(function () {
+                        var count = $(this).next().children().length;
+                        $("[name=SortCode]").val(count + 1);
+                    })
+                }, 500);
+            }
+
+            function initSelect(data) {
+                treeselect.render(
+                    {
+                        elem: "#ParentId",
+                        data: data || "/BlogManage/Category/Tree",
+                        method: "get"
+                    });
+            }
+        });
+    </script>
+}
+

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "添加/修改时光轴";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">时间</label>
+    <div class="layui-input-block">
+        <input type="text" class="layui-input" name="PublishDate" id="PublishDate" lay-verify="required|datetime" placeholder="请选择日期和时间" readonly />
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">内容</label>
+    <div class="layui-input-block">
+        <textarea type="text" name="Content" lay-verify="content" id="content" class="layui-hide" placeholder="请输入内容"></textarea>
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        var layedit, index;
+        layui.use(['form', 'layedit', 'laydate', 'tools'], function () {
+            var $ = layui.$, form = layui.form, tools = layui.tools, laydate = layui.laydate;
+            layedit = layui.layedit;
+            //初始化时间控件
+            laydate.render({
+                elem: '#PublishDate'
+                , type: 'datetime'
+                , trigger: 'click'
+            });
+            index = layedit.build('content', { height: 240 });
+            form.verify({
+                content: function (value) {
+                    value = $.trim(layedit.getText(index));
+                    if (value == "") return "请输入内容";
+                    layedit.sync(index);
+                }
+            });
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/BlogManage/TimeLine/Detail?key=" + key,
+                    success: function (data) {
+                        //layedit.sync(c);
+                        form.val("form", data);
+                        layedit.setContent(index, data.Content);
+                    }
+                });
+            }
+
+        });
+    </script>
+}
+

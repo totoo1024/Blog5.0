@@ -1,0 +1,15 @@
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\libgdiplus.so
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Core.deps.json
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Core.dll
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Core.pdb
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Aop.dll
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Common.dll
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Aop.pdb
+D:\资料\AppCore\App.Core\bin\Release\netcoreapp2.2\App.Common.pdb
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.csprojAssemblyReference.cache
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.csproj.CoreCompileInputs.cache
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.AssemblyInfoInputs.cache
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.AssemblyInfo.cs
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.csproj.CopyComplete
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.dll
+D:\资料\AppCore\App.Core\obj\Release\netcoreapp2.2\App.Core.pdb

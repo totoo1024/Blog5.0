@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "新增/编辑角色";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">角色名称</label>
+    <div class="layui-input-block">
+        <input type="text" name="FullName" class="layui-input" lay-verify="required" placeholder="请输入角色名称">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">角色编码</label>
+    <div class="layui-input-block">
+        <input type="text" name="EnCode" class="layui-input" lay-verify="required|en" placeholder="请输入角色编码">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="EnabledMark" value="1" lay-skin="switch" lay-text="启用|禁用" checked>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item  layui-form-text">
+    <label class="layui-form-label">简介</label>
+    <div class="layui-input-block">
+        <textarea name="Description" placeholder="请输入简介" class="layui-textarea"></textarea>
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="确定" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools;
+
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/SystemManage/Role/GetForm?key=" + key,
+                    success: function (data) {
+                        data.EnabledMark = data.EnabledMark ? 1 : 0;
+                        form.val("form", data);
+                    }
+                });
+            } else {
+                let total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+        });
+    </script>
+}

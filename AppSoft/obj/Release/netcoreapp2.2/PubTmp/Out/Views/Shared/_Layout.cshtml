@@ -1,0 +1,176 @@
+﻿@using App.Common.Net;
+@using App.Entities;
+@{
+    var user = HttpContextHelper.GetSession<QQUserinfo>("QQ_User");
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/web/images/favicon.ico" type="image/x-icon" />
+    <link rel="bookmark" href="~/web/images/favicon.ico" />
+    <link href="~/js/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/web/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/web/css/global.css" rel="stylesheet" />
+    <link href="~/web/css/animate.min.css" rel="stylesheet" />
+    @RenderSection("css", false)
+</head>
+<body>
+    <nav id="h" class="blog-nav layui-header">
+        <div class="blog-container">
+            @if (user != null)
+            {
+                <a href="javascript:void(0);" title="@user.NikeName" id="loginout" class="blog-user">
+                    <img src="@user.Image40" />
+                </a>
+            }
+            else
+            {
+                <a href="javascript:void(0);" id="login" class="blog-user">
+                    <i class="fa fa-qq"></i>
+                </a>
+            }
+            <a class="blog-logo" href="/">
+                <img src="~/web/images/logo.png" />
+            </a>
+            <ul class="layui-nav" lay-filter="nav">
+                <li class="layui-nav-item">
+                    <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/article/list"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/home/works"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;资源分享</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/home/timeline"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/home/about"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+                </li>
+                <span class="layui-nav-bar"></span>
+            </ul>
+            <a class="blog-navicon" href="javascript:;">
+                <i class="fa fa-navicon"></i>
+            </a>
+        </div>
+    </nav>
+    @RenderBody()
+
+    <!--底部信息开始-->
+    <footer class="footer">
+        <div class="footavatar">
+            <img src="~/web/images/default.jpg" class="footphoto">
+            <ul class="footinfo">
+                <p class="fname">
+                    <a href="javascript:;">37℃空间</a>
+                </p>
+                <p class="finfo">性别：^_^ 年龄：^_^</p>
+                <p>现居：深圳</p>
+            </ul>
+        </div>
+
+        <div class="info">
+            <p>人生，总会有不期而遇的温暖，和生生不息的希望。</p>
+            <span>
+                <a href="/">© 2018 37℃空间-博客</a>
+            </span>
+            <span>
+                <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备18160974号-1</a>
+            </span>
+            <span class="no-right-border">
+                <a href="/main" target="_blank">后台登录</a>
+            </span>
+            <span class="layui-clear no-right-border"></span>
+        </div>
+    </footer>
+
+    <ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
+        <li class="layui-nav-item">
+            <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="/article/list"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="/home/works"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;作品展示</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="/home/timeline"><i class="fa fa-road fa-fw"></i>&nbsp;点点滴滴</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="/home/about"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+        </li>
+        <span class="layui-nav-bar"></span>
+    </ul>
+    <div class="blog-share layui-hide shareOut">
+        <div class="blog-share-body">
+            <div style="width: 200px;height:100%;">
+                <div class="bdsharebuttonbox bdshare-button-style0-32" data-bd-bind="1533783925417">
+                    <a class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                    <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                    <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                    <a class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blog-mask animated layui-hide"></div>
+    <!--底部信息结束-->
+    <script src="~/js/layui/layui.js"></script>
+    <script src="~/web/js/global.js"></script>
+    <script src="~/js/axios.min.js"></script>
+    <script type="text/javascript">
+        layui.config({
+            base: "@Url.Content("~/js/")"
+        }).extend({
+            "tools": "tools"
+            });
+        layui.use(['jquery','layer'], function () {
+            var $ = layui.$, layer = layui.layer;
+            var url = location.pathname.split("?")[0];
+            if (url == "/") {
+                $("[lay-filter='nav'] a:eq(0)").parent().addClass("layui-this");
+            } else {
+                $("[lay-filter='nav'] a").each(function () {
+                    if ($(this).attr("href") == url) {
+                        $(this).parent().addClass("layui-this");
+                    }
+                })
+            }
+            $("#login").click(function () {
+                var loading = layer.msg("正在通过QQ登录", {
+                    icon: 16,
+                    time: 0
+                });
+                $.get("/home/login", "", function (result) {
+                    layer.close(loading);
+                    if (result.Status == 0) {
+                        window.location.href = result.Data;
+                    } else {
+                        layer.msg(result.Message, { icon: 5 });
+                    }
+                });
+            });
+
+            $("#loginout").click(function () {
+                layer.confirm('您确定要退出登录吗？', {
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    $.get("/home/signout", "", function (data) {
+                        if (data.Status == 0) {
+                            window.location.reload();
+                        } else {
+                            layer.msg("退出登录错误！", { icon: 5 });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    @RenderSection("script", false)
+</body>
+</html>

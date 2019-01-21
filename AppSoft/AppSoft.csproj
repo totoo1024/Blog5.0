@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+	<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\BlogManage\Data\" />
+    <Folder Include="Areas\BlogManage\Models\" />
+    <Folder Include="Areas\CompanyManag\Data\" />
+    <Folder Include="Areas\CompanyManag\Models\" />
+    <Folder Include="Areas\Main\Data\" />
+    <Folder Include="Areas\Main\Models\" />
+    <Folder Include="Areas\SystemManage\Data\" />
+    <Folder Include="Areas\SystemManage\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\CompanyManag\Views\User\Form.cshtml" />
+    <None Include="Areas\CompanyManag\Views\User\Index.cshtml" />
+    <None Include="Areas\CompanyManag\Views\User\Reset.cshtml" />
+    <None Include="Areas\SystemManage\Views\Button\Form.cshtml" />
+    <None Include="Areas\SystemManage\Views\Button\Index.cshtml" />
+    <None Include="Areas\SystemManage\Views\Module\Form.cshtml" />
+    <None Include="Areas\SystemManage\Views\Module\Index.cshtml" />
+    <None Include="Areas\SystemManage\Views\Permission\Index.cshtml" />
+    <None Include="Areas\SystemManage\Views\Role\Form.cshtml" />
+    <None Include="Areas\SystemManage\Views\Role\Index.cshtml" />
+    <None Include="wwwroot\web\images\favicon1.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Aop\App.Aop.csproj" />
+    <ProjectReference Include="..\App.Common\App.Common.csproj" />
+    <ProjectReference Include="..\App.Core\App.Core.csproj" />
+    <ProjectReference Include="..\App.IServices\App.IServices.csproj" />
+    <ProjectReference Include="..\App.Repository\App.Repository.csproj" />
+    <ProjectReference Include="..\App.Services\App.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\BlogManage\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\CompanyManag\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\SystemManage\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
