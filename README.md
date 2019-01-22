@@ -16,7 +16,10 @@
 1. 网站使用的sqlsugar ORM开源框架，相关文档请查看官网[sqlsugar框架](http://www.codeisbug.com/)，数据库使用的是mysql，ORM支持5种数据库，所以可以随意切换，具体请看sqlsugar官网文档
 2. 数据库设计以及备份和SQL文件放在AppSoft网站下的db目录下
 3. 写代码都有详细注释，这里就不一一介绍，没有复杂的设计（ :grin: 能力太菜）
-4.创建数据库后记得修改appsetting.json文件中的数据库连接字符串，以及Configs文件夹下的nlog.config的数据库连接字符串
+4. 创建数据库后记得修改appsetting.json文件中的数据库连接字符串，以及Configs文件夹下的nlog.config的数据库连接字符串
+5.在Linux部署注意事项，后台登录验证码使用的是ZKWeb.System.Drawing，所以在Linux上需要安装相关依赖，详细信息请参考作者说明[输入链接说明](https://github.com/zkweb-framework/zkweb.system.drawing)
+
+
 
 前台预览
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0122/094841_7b096768_967952.png "37℃空间-个人博客.png")
