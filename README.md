@@ -17,3 +17,9 @@
 2. 数据库设计以及备份和SQL文件放在AppSoft网站下的db目录下
 3. 写代码都有详细注释，这里就不一一介绍，没有复杂的设计（ :grin: 能力太菜）
 4.创建数据库后记得修改appsetting.json文件中的数据库连接字符串，以及Configs文件夹下的nlog.config的数据库连接字符串
+
+前台预览
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0122/094841_7b096768_967952.png "37℃空间-个人博客.png")
+
+后台预览![输入图片说明](https://images.gitee.com/uploads/images/2019/0122/095015_2d0d64ad_967952.png "后台管理系统.png")
+
