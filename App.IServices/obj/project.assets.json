@@ -1488,6 +1488,15 @@
           "lib/netstandard1.1/SQLitePCLRaw.provider.e_sqlite3.dll": {}
         }
       },
+      "sqlSugar/4.9.8.1": {
+        "type": "package",
+        "compile": {
+          "lib/SqlSugar.dll": {}
+        },
+        "runtime": {
+          "lib/SqlSugar.dll": {}
+        }
+      },
       "sqlSugarCore/4.9.7.2": {
         "type": "package",
         "dependencies": {
@@ -2945,7 +2954,8 @@
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
-          "ZKWeb.System.Drawing": "4.0.1"
+          "ZKWeb.System.Drawing": "4.0.1",
+          "sqlSugar": "4.9.8.1"
         },
         "compile": {
           "bin/placeholder/App.Common.dll": {}
@@ -4939,6 +4949,18 @@
         "lib/netstandard1.1/SQLitePCLRaw.provider.e_sqlite3.dll",
         "sqlitepclraw.provider.e_sqlite3.netstandard11.1.1.7.nupkg.sha512",
         "sqlitepclraw.provider.e_sqlite3.netstandard11.nuspec"
+      ]
+    },
+    "sqlSugar/4.9.8.1": {
+      "sha512": "suBiDRj2/UeZYFmH3slSoDJOqTsG9S6M7Eja+gRkCprEQcYiU0+f+jEGlCK7+PcQSnfE5/yNDEj58YHjvnxZpQ==",
+      "type": "package",
+      "path": "sqlsugar/4.9.8.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/SqlSugar.dll",
+        "sqlsugar.4.9.8.1.nupkg.sha512",
+        "sqlsugar.nuspec"
       ]
     },
     "sqlSugarCore/4.9.7.2": {
@@ -9110,5 +9132,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1”而不是项目目标框架“.NETCoreApp,Version=v2.2”还原包“sqlSugar 4.9.8.1”。此包可能与项目不完全兼容。",
+      "libraryId": "sqlSugar",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.2"
+      ]
+    }
+  ]
 }

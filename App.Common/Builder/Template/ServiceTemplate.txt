@@ -1,0 +1,29 @@
+﻿/**
+*┌──────────────────────────────────────────────────────────────┐
+*│　描    述：@Comment                                                    
+*│　作    者：@Author                                              
+*│　版    本：@Verison   模板代码自动生成                                              
+*│　创建时间：@GeneratorTime                            
+*└──────────────────────────────────────────────────────────────┘
+*/
+using System;
+using App.Entities;
+using App.IRepository;
+using App.IServices;
+
+namespace @Namespace
+{
+	/// <summary>
+	/// 描述：@Comment
+	/// 作者：@Author
+	/// 时间：@GeneratorTime
+	/// </summary>
+	public class @ServiceName : BaseLogic<@ModelName>, @IServiceName
+	{
+		@IRepositoryType _repository;
+        public @ServiceName(@IRepositoryType repository) : base(repository)
+        {
+            _repository = repository;
+        }
+	}
+}
