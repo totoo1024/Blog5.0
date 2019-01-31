@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "9549a5330123e48fa4387ceed61afc14d1186683"
+    "signature": "52ed00173685516a061d6f537e70a240229ecab6"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,6 +11,7 @@
           "AutoMapper": "8.0.0",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
+          "NLog": "4.5.11",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
           "ZKWeb.System.Drawing": "4.0.1",
@@ -798,6 +799,14 @@
           }
         }
       },
+      "NLog/4.5.11": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.5.11.8645"
+          }
+        }
+      },
       "Snowflake.Core/2.0.0": {
         "runtime": {
           "lib/netstandard2.0/Snowflake.Core.dll": {
@@ -1556,6 +1565,13 @@
       "sha512": "sha512-jmVyoEyk0In8r+AObYQyFKVFm7uSRzE0XSHSbEtBJcZDMV6DqJoyB4FLcHwprPVhAh826so0db3DIKXVnpGoPA==",
       "path": "newtonsoft.json/12.0.1",
       "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
+    },
+    "NLog/4.5.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Yni/XrDfbEhaCSXJsDkmW/n5AunhOxZ7OKKb+0U1I1/d8ZaKt3Jjzf20g/xPiKljmYuZKYqI5iI34g138kK8UQ==",
+      "path": "nlog/4.5.11",
+      "hashPath": "nlog.4.5.11.nupkg.sha512"
     },
     "Snowflake.Core/2.0.0": {
       "type": "package",

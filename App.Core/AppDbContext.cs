@@ -1,4 +1,4 @@
-﻿using App.Aop.Log;
+﻿using App.Common.Log;
 using SqlSugar;
 using System;
 using System.Data;

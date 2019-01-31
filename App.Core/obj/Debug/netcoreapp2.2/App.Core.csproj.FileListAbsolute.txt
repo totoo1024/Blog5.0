@@ -17,9 +17,7 @@ D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\libgdiplus.so
 D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.deps.json
 D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.dll
 D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.pdb
-D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Aop.dll
 D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Common.dll
-D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Aop.pdb
 D:\资料\ms\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Common.pdb
 D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csprojAssemblyReference.cache
 D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csproj.CoreCompileInputs.cache

@@ -2975,6 +2975,34 @@
           "lib/netstandard2.0/NLog.dll": {}
         }
       },
+      "NLog.Extensions.Logging/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "2.1.0",
+          "NLog": "[4.5.11, 5.0.0-beta01)"
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
+        }
+      },
+      "NLog.Web.AspNetCore/4.8.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.1.0",
+          "Microsoft.AspNetCore.Http": "2.1.0",
+          "Microsoft.AspNetCore.Routing.Abstractions": "2.1.0",
+          "NLog.Extensions.Logging": "1.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.Web.AspNetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.Web.AspNetCore.dll": {}
+        }
+      },
       "Npgsql/3.2.7": {
         "type": "package",
         "dependencies": {
@@ -5084,20 +5112,6 @@
           "lib/netstandard2.0/ZKWeb.System.Drawing.dll": {}
         }
       },
-      "App.Aop/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "App.Common": "1.0.0",
-          "NLog": "4.5.11"
-        },
-        "compile": {
-          "bin/placeholder/App.Aop.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/App.Aop.dll": {}
-        }
-      },
       "App.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -5105,6 +5119,7 @@
           "AutoMapper": "8.0.0",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
+          "NLog": "4.5.11",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
           "ZKWeb.System.Drawing": "4.0.1",
@@ -5121,7 +5136,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
-          "App.Aop": "1.0.0",
+          "App.Common": "1.0.0",
           "sqlSugarCore": "4.9.7.2"
         },
         "compile": {
@@ -8718,6 +8733,46 @@
         "lib/xamarinios10/NLog.xml",
         "nlog.4.5.11.nupkg.sha512",
         "nlog.nuspec"
+      ]
+    },
+    "NLog.Extensions.Logging/1.4.0": {
+      "sha512": "XughK7kRM1b+IuG4bZEpShHLweTCRNQb4kDUMsiob03QVpnacgcis6wDS0KlyXYaF/3Itid5b8+VbTBeP4WKhA==",
+      "type": "package",
+      "path": "nlog.extensions.logging/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net451/NLog.Extensions.Logging.dll",
+        "lib/net451/NLog.Extensions.Logging.xml",
+        "lib/net461/NLog.Extensions.Logging.dll",
+        "lib/net461/NLog.Extensions.Logging.xml",
+        "lib/netstandard1.3/NLog.Extensions.Logging.dll",
+        "lib/netstandard1.3/NLog.Extensions.Logging.xml",
+        "lib/netstandard1.5/NLog.Extensions.Logging.dll",
+        "lib/netstandard1.5/NLog.Extensions.Logging.xml",
+        "lib/netstandard2.0/NLog.Extensions.Logging.dll",
+        "lib/netstandard2.0/NLog.Extensions.Logging.xml",
+        "nlog.extensions.logging.1.4.0.nupkg.sha512",
+        "nlog.extensions.logging.nuspec"
+      ]
+    },
+    "NLog.Web.AspNetCore/4.8.0": {
+      "sha512": "Bs9tHNwdTDA7FFxS+tqxrr0EQAZjcnex6drcjCni9yHEupZdo5wOJP3oSGe+2W1enHo3RjglM2CvVbFuqbhcXA==",
+      "type": "package",
+      "path": "nlog.web.aspnetcore/4.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net451/NLog.Web.AspNetCore.dll",
+        "lib/net451/NLog.Web.AspNetCore.xml",
+        "lib/net461/NLog.Web.AspNetCore.dll",
+        "lib/net461/NLog.Web.AspNetCore.xml",
+        "lib/netstandard1.5/NLog.Web.AspNetCore.dll",
+        "lib/netstandard1.5/NLog.Web.AspNetCore.xml",
+        "lib/netstandard2.0/NLog.Web.AspNetCore.dll",
+        "lib/netstandard2.0/NLog.Web.AspNetCore.xml",
+        "nlog.web.aspnetcore.4.8.0.nupkg.sha512",
+        "nlog.web.aspnetcore.nuspec"
       ]
     },
     "Npgsql/3.2.7": {
@@ -14097,11 +14152,6 @@
         "zkweb.system.drawing.nuspec"
       ]
     },
-    "App.Aop/1.0.0": {
-      "type": "project",
-      "path": "../App.Aop/App.Aop.csproj",
-      "msbuildProject": "../App.Aop/App.Aop.csproj"
-    },
     "App.Common/1.0.0": {
       "type": "project",
       "path": "../App.Common/App.Common.csproj",
@@ -14140,7 +14190,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "App.Aop >= 1.0.0",
       "App.Common >= 1.0.0",
       "App.Core >= 1.0.0",
       "App.IServices >= 1.0.0",
@@ -14154,7 +14203,8 @@
       "Microsoft.AspNetCore.Session >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.0",
-      "MySql.Data >= 8.0.13"
+      "MySql.Data >= 8.0.13",
+      "NLog.Web.AspNetCore >= 4.8.0"
     ]
   },
   "packageFolders": {
@@ -14187,9 +14237,6 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\资料\\ms\\Blog\\App.Aop\\App.Aop.csproj": {
-              "projectPath": "D:\\资料\\ms\\Blog\\App.Aop\\App.Aop.csproj"
-            },
             "D:\\资料\\ms\\Blog\\App.Common\\App.Common.csproj": {
               "projectPath": "D:\\资料\\ms\\Blog\\App.Common\\App.Common.csproj"
             },
@@ -14257,6 +14304,10 @@
           "MySql.Data": {
             "target": "Package",
             "version": "[8.0.13, )"
+          },
+          "NLog.Web.AspNetCore": {
+            "target": "Package",
+            "version": "[4.8.0, )"
           }
         },
         "imports": [

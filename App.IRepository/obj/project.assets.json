@@ -2954,20 +2954,6 @@
           "lib/netstandard2.0/ZKWeb.System.Drawing.dll": {}
         }
       },
-      "App.Aop/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "App.Common": "1.0.0",
-          "NLog": "4.5.11"
-        },
-        "compile": {
-          "bin/placeholder/App.Aop.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/App.Aop.dll": {}
-        }
-      },
       "App.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -2975,6 +2961,7 @@
           "AutoMapper": "8.0.0",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
+          "NLog": "4.5.11",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
           "ZKWeb.System.Drawing": "4.0.1",
@@ -2991,7 +2978,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
-          "App.Aop": "1.0.0",
+          "App.Common": "1.0.0",
           "sqlSugarCore": "4.9.7.2"
         },
         "compile": {
@@ -9118,11 +9105,6 @@
         "zkweb.system.drawing.4.0.1.nupkg.sha512",
         "zkweb.system.drawing.nuspec"
       ]
-    },
-    "App.Aop/1.0.0": {
-      "type": "project",
-      "path": "../App.Aop/App.Aop.csproj",
-      "msbuildProject": "../App.Aop/App.Aop.csproj"
     },
     "App.Common/1.0.0": {
       "type": "project",

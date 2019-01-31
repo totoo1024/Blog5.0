@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 using App.Common.Extensions;
 using App.Core;
-using AppSoft.Filter;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,8 +13,10 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.WebEncoders;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace AppSoft
 {
@@ -88,8 +87,11 @@ namespace AppSoft
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //配置nlog
+            loggerFactory.AddNLog();
+            env.ConfigureNLog("Configs/nlog.config");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

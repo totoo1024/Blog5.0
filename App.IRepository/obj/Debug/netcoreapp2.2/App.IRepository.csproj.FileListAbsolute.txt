@@ -21,13 +21,11 @@ D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\libgdiplus.so
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.IRepository.deps.json
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.IRepository.dll
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.IRepository.pdb
-D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Aop.dll
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Common.dll
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Core.dll
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Entities.dll
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Core.pdb
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Entities.pdb
-D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Aop.pdb
 D:\资料\ms\Blog\App.IRepository\bin\Debug\netcoreapp2.2\App.Common.pdb
 D:\资料\ms\Blog\App.IRepository\obj\Debug\netcoreapp2.2\App.IRepository.csprojAssemblyReference.cache
 D:\资料\ms\Blog\App.IRepository\obj\Debug\netcoreapp2.2\App.IRepository.csproj.CoreCompileInputs.cache

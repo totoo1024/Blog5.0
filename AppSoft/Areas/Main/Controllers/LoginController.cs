@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using App.Common.Utils;
 using App.Common.Auth;
-using App.Aop.Log;
+using App.Common.Log;
 using AppSoft.Filter;
 using App.Entities;
 
