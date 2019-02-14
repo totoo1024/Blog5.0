@@ -7,6 +7,7 @@ using SqlSugarDbType = SqlSugar.DbType;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using App.Common.Utils;
 
 namespace App.Core
 {
@@ -18,7 +19,7 @@ namespace App.Core
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        public static string ConnectionString { get; set; }
+        public static string ConnectionString { get; set; } = ConfigurationUtil.DBConnectionString;
 
         /// <summary>
         /// 获取ORM数据库连接对象(只操作数据库一次的使用, 否则会进行多次数据库连接和关闭)

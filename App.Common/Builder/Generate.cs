@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using SqlSugar;
+using App.Common.Utils;
 
 namespace App.Common.Builder
 {
@@ -91,7 +92,7 @@ namespace App.Common.Builder
         {
             var db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = "Database='appsoft';Data Source='192.168.31.56';User Id='admin';Password='123456';charset='utf8';pooling=true",
+                ConnectionString = ConfigurationUtil.DBConnectionString,
                 DbType = DbType.MySql,
                 InitKeyType = InitKeyType.Attribute,//使用特性识别主键
                 IsAutoCloseConnection = true

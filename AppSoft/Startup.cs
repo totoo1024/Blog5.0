@@ -69,8 +69,6 @@ namespace AppSoft
                 options.SlidingExpiration = true;// 是否在过期时间过半的时候，自动延期
             });
 
-            AppDbContext.ConnectionString = Configuration.GetConnectionString("MySqlConnection");
-
             #region Autofac注入
             //实例化一个autofac的创建容器
             var builder = new ContainerBuilder();
