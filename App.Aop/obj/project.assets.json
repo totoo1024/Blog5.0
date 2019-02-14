@@ -1677,6 +1677,7 @@
           "AutoMapper": "8.0.0",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
+          "NLog": "4.5.11",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
           "ZKWeb.System.Drawing": "4.0.1",
