@@ -7,6 +7,7 @@ using App.IRepository;
 using App.IServices;
 using App.Common.Utils;
 using App.Entities.Dtos;
+using App.Common.Cache;
 
 namespace App.Services
 {
@@ -57,7 +58,7 @@ namespace App.Services
             }
 
             //删除现有权限重新分配权限
-            await DeleteAsync(c => c.AuthorizeId == roleId);
+            await DeleteRemoveCacheAsync(c => c.AuthorizeId == roleId);
 
             List<SysPermission> list = new List<SysPermission>();
             if (menus.Any())
@@ -69,7 +70,9 @@ namespace App.Services
                 var bs = (from b in buttons select new SysPermission() { PermissionId = SnowflakeUtil.NextStringId(), AuthorizeId = roleId, ModuleType = 2, ObjectType = 1, SysModuleId = b.ButtonId }).ToList();
                 list.AddRange(bs);
             }
-            return await InsertAsync(list);
+            //删除缓存
+            Redis.DelPattern(roleId);
+            return await InsertRemoveCacheAsync(list);
         }
 
         /// <summary>
@@ -79,6 +82,14 @@ namespace App.Services
         /// <returns></returns>
         public async Task<object> GetMenuAndButton(params string[] authorrizeId)
         {
+            string key = string.Join('_', authorrizeId.OrderBy(o => o).ToArray());
+
+            //获取缓存
+            object data = Redis.Current.Get<object>(key);
+            if (data != null)
+            {
+                return data;
+            }
             var author = await QueryableAsync(p => authorrizeId.Contains(p.AuthorizeId));
             var mids = author.Select(c => c.SysModuleId);
             //所有菜单
@@ -101,7 +112,10 @@ namespace App.Services
                 });
                 childMenu[menu.EnCode] = child;
             }
-            return new { topMenus = topMenu, childMenus = childMenu, rowButtons = row, toolButtons = tool };
+            data = new { topMenus = topMenu, childMenus = childMenu, rowButtons = row, toolButtons = tool };
+            //设置缓存
+            Redis.Current.Set(key, data);
+            return data;
         }
 
         /// <summary>
@@ -113,33 +127,18 @@ namespace App.Services
         public bool CheckPermission(string authorizeId, string url)
         {
             url = url.ToLower();
-            //Cache cache = new Cache();
-            //var menus = cache.GetCache<List<SysModule>>(authorizeId.ToString() + "menus") ?? new List<SysModule>();
-            //var buttons = cache.GetCache<List<SysButton>>(authorizeId.ToString() + "buttons") ?? new List<SysButton>();
-            //if (!buttons.Any() && !menus.Any())
-            //{
             List<SysModule> menus;
             List<SysButton> buttons;
-            var permissions = Queryable(p => p.AuthorizeId == authorizeId).Select(c => c.SysModuleId).ToList();
+            var permissions = QueryableCache(p => p.AuthorizeId == authorizeId).Select(c => c.SysModuleId).ToList();
             if (permissions.Any())
             {
-                menus = _sysModuleLogic.Queryable(m => permissions.Contains(m.ModuleId));
-                buttons = _sysButtonLogic.Queryable(b => permissions.Contains(b.ButtonId));
-                //DateTime date = DateTime.Now.AddMinutes(30);
-                //if (menus.Any())
-                //{
-                //    cache.WriteCache(menus, authorizeId.ToString() + "menus", date);
-                //}
-                //if (buttons.Any())
-                //{
-                //    cache.WriteCache(buttons, authorizeId.ToString() + "buttons", date);
-                //}
+                menus = _sysModuleLogic.QueryableCache(m => permissions.Contains(m.ModuleId));
+                buttons = _sysButtonLogic.QueryableCache(b => permissions.Contains(b.ButtonId));
                 if (menus.Where(m => m.UrlAddress != null && m.UrlAddress.ToLower() == url).Any() || buttons.Where(b => b.UrlAddress != null && b.UrlAddress.ToLower() == url).Any())
                 {
                     return true;
                 }
             }
-            //}
 
             return false;
         }

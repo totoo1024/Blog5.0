@@ -25,7 +25,7 @@ namespace App.Services
         /// <returns></returns>
         public OperateResult Save(CategoryInfo category)
         {
-            int count = QueryableCount(c => c.CategoryName != category.CategoryName && c.CategoryId != category.CategoryId);
+            int count = QueryableCount(c => c.CategoryName == category.CategoryName && c.CategoryId != category.CategoryId);
             if (count > 0)
             {
                 return new OperateResult("文章栏目已存在");
@@ -35,7 +35,7 @@ namespace App.Services
                 if (string.IsNullOrWhiteSpace(category.CategoryId))
                 {
                     category.CategoryId = SnowflakeUtil.NextStringId();
-                    return Insert(category);
+                    return InsertRemoveCache(category);
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace App.Services
                             return result;
                         }
                     }
-                    return Update(category, i => new { i.CreatorTime, i.DeleteMark });
+                    return UpdateRemoveCache(category, i => new { i.CreatorTime, i.DeleteMark });
                 }
             }
         }

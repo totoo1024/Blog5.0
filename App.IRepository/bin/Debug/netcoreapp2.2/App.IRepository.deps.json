@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "8622519e3b597e83119c81a4490d91b53eacadca"
+    "signature": "defd71bc4f5275868f91ac247ca0bfc39e665108"
   },
   "compilationOptions": {},
   "targets": {
@@ -24,6 +24,18 @@
           "lib/netstandard2.0/AutoMapper.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.0.0"
+          }
+        }
+      },
+      "CSRedisCore/3.0.37": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "SafeObjectPool": "1.0.13"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CSRedisCore.dll": {
+            "assemblyVersion": "3.0.37.0",
+            "fileVersion": "3.0.37.0"
           }
         }
       },
@@ -1022,6 +1034,14 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "SafeObjectPool/1.0.13": {
+        "runtime": {
+          "lib/netstandard2.0/SafeObjectPool.dll": {
+            "assemblyVersion": "1.0.13.0",
+            "fileVersion": "1.0.13.0"
           }
         }
       },
@@ -2078,6 +2098,7 @@
       "App.Common/1.0.0": {
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "CSRedisCore": "3.0.37",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "NLog": "4.5.11",
@@ -2121,6 +2142,13 @@
       "sha512": "sha512-kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
       "path": "automapper/8.0.0",
       "hashPath": "automapper.8.0.0.nupkg.sha512"
+    },
+    "CSRedisCore/3.0.37": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rXl9BChCsq8Ker61wUbjYd0XMn5iwnv2+rc7j+BHlsJtqtqgteekU7pktMU90+5ydWoIMRDU+h8E1YofUeB1WA==",
+      "path": "csrediscore/3.0.37",
+      "hashPath": "csrediscore.3.0.37.nupkg.sha512"
     },
     "Microsoft.AspNetCore/2.2.0": {
       "type": "package",
@@ -2730,6 +2758,13 @@
       "sha512": "sha512-wcWjsptypJln9sahNSUt+pCIYW1qIpv1y1N22BqwPZEJ9bKPZt/tt5AcFYonVhJ95RzzXEJHMYBspmvm+bdOKg==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "SafeObjectPool/1.0.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GBglhbI+6jrLQuYiOGGPEwhI9VI9dn37yIHCa0+HmNMMoC1TjtLmRoa4H0Fy11bB/R2MycJpI9eKOlSawyJQpQ==",
+      "path": "safeobjectpool/1.0.13",
+      "hashPath": "safeobjectpool.1.0.13.nupkg.sha512"
     },
     "Snowflake.Core/2.0.0": {
       "type": "package",

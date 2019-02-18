@@ -44,7 +44,7 @@ namespace AppSoft.Areas.BlogManage.Controllers
         [HttpPost]
         public IActionResult Delete(string key)
         {
-            return Json(_friendLinkLogic.Update(f => new FriendLink() { DeleteMark = true }, c => c.FriendLinkId == key));
+            return Json(_friendLinkLogic.UpdateRemoveCache(f => new FriendLink() { DeleteMark = true }, c => c.FriendLinkId == key));
         }
     }
 }

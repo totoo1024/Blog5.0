@@ -33,7 +33,7 @@ namespace AppSoft.Areas.BlogManage.Controllers
         {
             return Json(_noticeinfoLogic.Save(noticeinfo));
         }
-        
+
         [AllowAccessFilter]
         [Description("通知详情")]
         public IActionResult Detail(string key)
@@ -45,7 +45,7 @@ namespace AppSoft.Areas.BlogManage.Controllers
         [Description("删除通知")]
         public IActionResult Delete(string key)
         {
-            return Json(_noticeinfoLogic.Update(n => new Noticeinfo() { DeleteMark = true }, c => c.NoticeId == key));
+            return Json(_noticeinfoLogic.UpdateRemoveCache(n => new Noticeinfo() { DeleteMark = true }, c => c.NoticeId == key));
         }
     }
 }

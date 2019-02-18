@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "32e7f18907e7bc4c8a59d2cbcc00d83520c9a455"
+    "signature": "1ba9b028e48e8271be6655189a5036403ea18de8"
   },
   "compilationOptions": {
     "defines": [
@@ -90,6 +90,21 @@
         },
         "compile": {
           "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "CSRedisCore/3.0.37": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "SafeObjectPool": "1.0.13"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CSRedisCore.dll": {
+            "assemblyVersion": "3.0.37.0",
+            "fileVersion": "3.0.37.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/CSRedisCore.dll": {}
         }
       },
       "Google.Protobuf/3.5.1": {
@@ -562,6 +577,17 @@
           "lib/netstandard2.0/Oracle.ManagedDataAccess.dll": {}
         }
       },
+      "SafeObjectPool/1.0.13": {
+        "runtime": {
+          "lib/netstandard2.0/SafeObjectPool.dll": {
+            "assemblyVersion": "1.0.13.0",
+            "fileVersion": "1.0.13.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/SafeObjectPool.dll": {}
+        }
+      },
       "Snowflake.Core/2.0.0": {
         "runtime": {
           "lib/netstandard2.0/Snowflake.Core.dll": {
@@ -917,6 +943,7 @@
       "App.Common/1.0.0": {
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "CSRedisCore": "3.0.37",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "NLog": "4.5.11",
@@ -4048,6 +4075,13 @@
       "path": "automapper/8.0.0",
       "hashPath": "automapper.8.0.0.nupkg.sha512"
     },
+    "CSRedisCore/3.0.37": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rXl9BChCsq8Ker61wUbjYd0XMn5iwnv2+rc7j+BHlsJtqtqgteekU7pktMU90+5ydWoIMRDU+h8E1YofUeB1WA==",
+      "path": "csrediscore/3.0.37",
+      "hashPath": "csrediscore.3.0.37.nupkg.sha512"
+    },
     "Google.Protobuf/3.5.1": {
       "type": "package",
       "serviceable": true,
@@ -4243,6 +4277,13 @@
       "sha512": "sha512-YWpsNnGbLt5CjpfHzt9RUZbp8CPC5AOkeATSY10WICit9TYtkt3cLBP1i7o1b1jHJen6JWwYrxGRG0BTeN9D/Q==",
       "path": "oracle.manageddataaccess.core/2.18.3",
       "hashPath": "oracle.manageddataaccess.core.2.18.3.nupkg.sha512"
+    },
+    "SafeObjectPool/1.0.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GBglhbI+6jrLQuYiOGGPEwhI9VI9dn37yIHCa0+HmNMMoC1TjtLmRoa4H0Fy11bB/R2MycJpI9eKOlSawyJQpQ==",
+      "path": "safeobjectpool/1.0.13",
+      "hashPath": "safeobjectpool.1.0.13.nupkg.sha512"
     },
     "Snowflake.Core/2.0.0": {
       "type": "package",

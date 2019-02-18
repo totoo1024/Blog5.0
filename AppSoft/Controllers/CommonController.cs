@@ -27,7 +27,7 @@ namespace AppSoft.Controllers
         /// <returns></returns>
         public IActionResult Notice()
         {
-            return Json(_noticeinfoLogic.Queryable(null, o => o.SortCode, false));
+            return Json(_noticeinfoLogic.QueryableCache(null, o => o.SortCode, false));
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace AppSoft.Controllers
         /// <returns></returns>
         public IActionResult Link()
         {
-            return Json(_friendLinkLogic.Queryable(null, o => o.SortCode, false));
+            return Json(_friendLinkLogic.QueryableCache(null, o => o.SortCode, false));
         }
 
         /// <summary>

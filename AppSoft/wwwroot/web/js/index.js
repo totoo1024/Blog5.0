@@ -47,7 +47,7 @@
         });
     });
     $("#xlwb").mouseover(function () {
-        layer.tips('新浪微博', this, {
+        layer.tips('码云', this, {
             tips: 1
         });
     });

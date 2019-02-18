@@ -29,7 +29,7 @@ namespace AppSoft.Areas.SystemManage.Controllers
         [HttpGet, Description("菜单列表"), AllowAccessFilter]
         public ActionResult GetMenus()
         {
-            var menus = _sysModuleLogic.Queryable(m => m.DeleteMark == false, o => o.SortCode, false);
+            var menus = _sysModuleLogic.QueryableCache(m => m.DeleteMark == false, o => o.SortCode, false);
             var obj = new { code = 0, msg = "ok", data = menus, count = menus.Count() };
 
             return Json(obj);
@@ -42,7 +42,7 @@ namespace AppSoft.Areas.SystemManage.Controllers
         [HttpGet, Description("获取下拉框树形菜单"), AllowAccessFilter]
         public ActionResult GetMenuTree()
         {
-            var menus = _sysModuleLogic.Queryable(m => m.DeleteMark == false && m.EnabledMark == true);
+            var menus = _sysModuleLogic.QueryableCache(m => m.DeleteMark == false && m.EnabledMark == true);
             var tree = GetTree(menus, "0");
             List<object> list = new List<object>() {
                     new{ id="0", name="父节点",icon="seraph icon-viewheadline",spread = true, children =tree}
@@ -57,7 +57,7 @@ namespace AppSoft.Areas.SystemManage.Controllers
         [HttpGet, Description("按钮管理菜单树"), AllowAccessFilter]
         public ActionResult GetAllMenuTree()
         {
-            var menus = _sysModuleLogic.Queryable(m => m.DeleteMark == false);
+            var menus = _sysModuleLogic.QueryableCache(m => m.DeleteMark == false);
             var tree = GetTree(menus, "0");
             List<object> list = new List<object>() {
                     new{ id="0", name="菜单",icon="layui-icon layui-tree-branch",spread = true, children =tree}
@@ -87,14 +87,14 @@ namespace AppSoft.Areas.SystemManage.Controllers
         [Description("启用/禁用菜单")]
         public ActionResult Enable(string id, bool status)
         {
-            return Json(_sysModuleLogic.Update(m => new SysModule() { EnabledMark = status }, c => c.ModuleId == id));
+            return Json(_sysModuleLogic.UpdateRemoveCache(m => new SysModule() { EnabledMark = status }, c => c.ModuleId == id));
         }
 
         [HttpPost]
         [Description("删除菜单")]
         public ActionResult Delete(string key)
         {
-            return Json(_sysModuleLogic.Update(m => new SysModule() { DeleteMark = true }, c => c.ModuleId == key));
+            return Json(_sysModuleLogic.UpdateRemoveCache(m => new SysModule() { DeleteMark = true }, c => c.ModuleId == key));
         }
 
         [HttpGet, Description("获取当前用户的可访问菜单按钮")]

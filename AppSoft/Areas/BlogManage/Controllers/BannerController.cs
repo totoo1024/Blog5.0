@@ -89,7 +89,7 @@ namespace AppSoft.Areas.BlogManage.Controllers
         [Description("删除轮播图")]
         public IActionResult Delete(string key)
         {
-            return Json(_bannerInfoLogic.Update(b => new BannerInfo() { DeleteMark = true }, c => c.BannerId == key));
+            return Json(_bannerInfoLogic.UpdateRemoveCache(b => new BannerInfo() { DeleteMark = true }, c => c.BannerId == key));
         }
     }
 }

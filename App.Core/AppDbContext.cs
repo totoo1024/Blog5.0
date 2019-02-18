@@ -2,12 +2,12 @@
 using SqlSugar;
 using System;
 using System.Data;
-using System.Text;
 using SqlSugarDbType = SqlSugar.DbType;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using App.Common.Utils;
+using App.Common.Cache;
 
 namespace App.Core
 {
@@ -61,7 +61,11 @@ namespace App.Core
                 ConnectionString = ConnectionString,
                 DbType = dbType,
                 InitKeyType = InitKeyType.Attribute,//使用特性识别主键
-                IsAutoCloseConnection = isAutoCloseConnection
+                IsAutoCloseConnection = isAutoCloseConnection,
+                ConfigureExternalServices = new ConfigureExternalServices
+                {
+                    DataInfoCacheService = new RedisCache()//Redis缓存实现类
+                }
             });
             db.Ado.CommandTimeOut = commandTimeOut;
 
@@ -112,6 +116,7 @@ namespace App.Core
                 }
                 catch (Exception ex)
                 {
+                    NLogger.Error(ex);
                     throw ex;
                 }
                 finally
@@ -144,6 +149,7 @@ namespace App.Core
                 catch (Exception ex)
                 {
                     db.Ado.RollbackTran();
+                    NLogger.Error(ex);
                     throw ex;
                 }
                 finally

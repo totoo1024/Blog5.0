@@ -15,6 +15,19 @@
           "lib/netstandard2.0/AutoMapper.dll": {}
         }
       },
+      "CSRedisCore/3.0.37": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "SafeObjectPool": "1.0.13"
+        },
+        "compile": {
+          "lib/netstandard2.0/CSRedisCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/CSRedisCore.dll": {}
+        }
+      },
       "Microsoft.AspNetCore/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1390,6 +1403,15 @@
             "assetType": "native",
             "rid": "win-x86"
           }
+        }
+      },
+      "SafeObjectPool/1.0.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/SafeObjectPool.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SafeObjectPool.dll": {}
         }
       },
       "Snowflake.Core/2.0.0": {
@@ -2959,6 +2981,7 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "CSRedisCore": "3.0.37",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "NLog": "4.5.11",
@@ -3033,6 +3056,19 @@
         "lib/netstandard2.0/AutoMapper.dll",
         "lib/netstandard2.0/AutoMapper.pdb",
         "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "CSRedisCore/3.0.37": {
+      "sha512": "rXl9BChCsq8Ker61wUbjYd0XMn5iwnv2+rc7j+BHlsJtqtqgteekU7pktMU90+5ydWoIMRDU+h8E1YofUeB1WA==",
+      "type": "package",
+      "path": "csrediscore/3.0.37",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "csrediscore.3.0.37.nupkg.sha512",
+        "csrediscore.nuspec",
+        "lib/netstandard2.0/CSRedisCore.dll",
+        "lib/netstandard2.0/CSRedisCore.xml"
       ]
     },
     "Microsoft.AspNetCore/2.2.0": {
@@ -4874,6 +4910,19 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SafeObjectPool/1.0.13": {
+      "sha512": "GBglhbI+6jrLQuYiOGGPEwhI9VI9dn37yIHCa0+HmNMMoC1TjtLmRoa4H0Fy11bB/R2MycJpI9eKOlSawyJQpQ==",
+      "type": "package",
+      "path": "safeobjectpool/1.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/SafeObjectPool.dll",
+        "lib/netstandard2.0/SafeObjectPool.xml",
+        "safeobjectpool.1.0.13.nupkg.sha512",
+        "safeobjectpool.nuspec"
       ]
     },
     "Snowflake.Core/2.0.0": {

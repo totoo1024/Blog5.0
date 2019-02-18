@@ -17,7 +17,7 @@ namespace AppSoft.Controllers
         }
         public IActionResult Index()
         {
-            return Json(_categoryInfoLogic.Queryable(c => c.EnabledMark == true && c.ParentId == "0").Select(s => new { CategoryId = s.CategoryId, CategoryName = s.CategoryName }));
+            return Json(_categoryInfoLogic.QueryableCache(c => c.EnabledMark == true && c.ParentId == "0").Select(s => new { CategoryId = s.CategoryId, CategoryName = s.CategoryName }));
         }
     }
 }

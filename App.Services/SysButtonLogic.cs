@@ -35,11 +35,11 @@ namespace App.Services
             if (string.IsNullOrEmpty(sysButton.ButtonId))
             {
                 sysButton.ButtonId = SnowflakeUtil.NextStringId();
-                return Insert(sysButton);
+                return InsertRemoveCache(sysButton);
             }
             else
             {
-                return Update(sysButton, i => new { i.SysModuleId, i.CreatorTime, i.CreatorAccountId });
+                return UpdateRemoveCache(sysButton, i => new { i.SysModuleId, i.CreatorTime, i.CreatorAccountId });
             }
         }
     }

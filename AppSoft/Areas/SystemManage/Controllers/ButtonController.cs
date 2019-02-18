@@ -47,7 +47,7 @@ namespace AppSoft.Areas.SystemManage.Controllers
         [Description("删除按钮")]
         public IActionResult Delete(string key)
         {
-            return Json(_sysButtonLogic.Delete(key));
+            return Json(_sysButtonLogic.DeleteRemoveCache(key));
         }
     }
 }

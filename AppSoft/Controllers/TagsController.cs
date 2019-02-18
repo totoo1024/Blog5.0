@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace AppSoft.Controllers
 {
-    public class TagsController : Controller
+    public class TagsController : BaseWebController
     {
         private readonly ITagsInfoLogic _tagsInfoLogic;
         public TagsController(ITagsInfoLogic tagsInfoLogic)

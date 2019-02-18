@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using App.IServices;
 using App.Entities;
-using App.Common.Auth;
 using App.Entities.Dtos;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using App.Common.Net;
-using App.Common.Utils;
 
 namespace AppSoft.Controllers
 {
@@ -34,7 +31,7 @@ namespace AppSoft.Controllers
         /// <returns></returns>
         public IActionResult Index(string code, string state)
         {
-            List<BannerInfo> list = _bannerInfoLogic.Queryable(null, o => o.SortCode, false);
+            List<BannerInfo> list = _bannerInfoLogic.QueryableCache(null, o => o.SortCode, false);
             return View(list);
         }
 

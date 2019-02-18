@@ -46,20 +46,20 @@ namespace AppSoft.Areas.BlogManage.Controllers
         [Description("启用禁用栏目")]
         public IActionResult Enable(string id, bool status)
         {
-            return Json(_categoryInfoLogic.Update(m => new CategoryInfo() { EnabledMark = status }, c => c.CategoryId == id));
+            return Json(_categoryInfoLogic.UpdateRemoveCache(m => new CategoryInfo() { EnabledMark = status }, c => c.CategoryId == id));
         }
 
         [HttpPost]
         [Description("删除栏目")]
         public IActionResult Delete(string key)
         {
-            return Json(_categoryInfoLogic.Update(info => new CategoryInfo() { DeleteMark = true }, c => c.CategoryId == key));
+            return Json(_categoryInfoLogic.UpdateRemoveCache(info => new CategoryInfo() { DeleteMark = true }, c => c.CategoryId == key));
         }
 
         [Description("栏目树形节点"), AllowAccessFilter]
         public IActionResult Tree()
         {
-            List<CategoryInfo> categories = _categoryInfoLogic.Queryable(m => m.DeleteMark == false && m.EnabledMark == true);
+            List<CategoryInfo> categories = _categoryInfoLogic.QueryableCache(m => m.DeleteMark == false && m.EnabledMark == true);
             var tree = GetTree(categories, "0");
             List<object> list = new List<object>() {
                     new{ id="0", name="一级栏目",icon="",spread = true, children =tree}
@@ -71,7 +71,7 @@ namespace AppSoft.Areas.BlogManage.Controllers
         [Description("获取所有栏目")]
         public IActionResult List()
         {
-            List<CategoryInfo> list = _categoryInfoLogic.Queryable(c => c.EnabledMark == true);
+            List<CategoryInfo> list = _categoryInfoLogic.QueryableCache(c => c.EnabledMark == true);
             return Json(TreeJson(list));
         }
 
