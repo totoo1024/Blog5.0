@@ -13,7 +13,7 @@
 
 #### 使用说明
 
-1. 网站使用的sqlsugar ORM开源框架，相关文档请查看官网[sqlsugar框架](http://www.codeisbug.com/)，数据库使用的是mysql，ORM支持5种数据库，所以可以随意切换，具体请看sqlsugar官网文档
+1. 网站使用的sqlsugar ORM开源框架，相关文档请查看官网[sqlsugar框架](http://www.codeisbug.com/)，数据库使用的是mysql，ORM支持5种数据库（MySql、SqlServer、Sqlite、Oracle、Postgresql），所以可以随意切换，具体请看sqlsugar官网文档
 2. 数据库设计以及备份和SQL文件放在AppSoft网站下的db目录下,项目中后台管理员登录用户名/密码:admin/admin1024
 3. 写代码都有详细注释，这里就不一一介绍
 4. 创建数据库后记得修改appsetting.json文件中的数据库连接字符串，以及Configs文件夹下的nlog.config的数据库连接字符串
