@@ -20,7 +20,7 @@
 5. 在Linux部署注意事项，后台登录验证码使用的是ZKWeb.System.Drawing，所以在Linux上需要安装相关依赖，详细信息请参考作者说明[ZKWeb.System.Drawing](https://github.com/zkweb-framework/zkweb.system.drawing)
 6.博客中使用Redis缓存，如果要使用Redis缓存功能请先安装Redis，在 AppSoft根目录appsettings.json中配置Redis连接字符串
 7.记录文本日志（数据库日志）使用NLOG
-
+8. 接入QQ授权登录留言评论
 
 
 
