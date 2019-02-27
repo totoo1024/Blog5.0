@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using App.Common.Cache;
 using App.Common.Extensions;
 using App.Core;
 using Autofac;
@@ -68,6 +69,8 @@ namespace AppSoft
                 options.Cookie.HttpOnly = true;//不允许客户端获取
                 options.SlidingExpiration = true;// 是否在过期时间过半的时候，自动延期
             });
+
+            Redis.Initialization();
 
             #region Autofac注入
             //实例化一个autofac的创建容器
