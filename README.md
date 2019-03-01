@@ -4,7 +4,7 @@
 个人博客网站
 
 #### 软件架构
-网站使用的是.net core 2.2、Redis、Autofac、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（相关操作日志和异常已经记录到数据库，没有做展示页面）
+网站使用的是.Net Core 2.2、Redis、Autofac、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（相关操作日志和异常已经记录到数据库，没有做展示页面）
 [博客地址](http://www.miboxapp.com) http://www.miboxapp.com
 [后台地址](http://[输入链接说明](http://www.miboxapp.com/main)) http://www.miboxapp.com/main
 后台登录用户名/密码：root/123456
@@ -22,7 +22,7 @@
 7. 记录文本日志（数据库日志）使用NLOG
 8. 接入QQ授权登录留言评论
 
-
+如果有什么BUG还希望大家提交到Issues，我看到会及时修复。
 
 前台预览
 ![前台预览](https://images.gitee.com/uploads/images/2019/0122/094841_7b096768_967952.png "37℃空间-个人博客.png")
