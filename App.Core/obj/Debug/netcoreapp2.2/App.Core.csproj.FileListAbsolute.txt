@@ -26,3 +26,16 @@ D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.AssemblyInfo.cs
 D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csproj.CopyComplete
 D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.dll
 D:\资料\ms\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.pdb
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\libgdiplus.so
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.deps.json
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.dll
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Core.pdb
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Common.dll
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\bin\Debug\netcoreapp2.2\App.Common.pdb
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.csproj.CopyComplete
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.dll
+C:\Users\Administrator\Desktop\UI\Blog\App.Core\obj\Debug\netcoreapp2.2\App.Core.pdb

@@ -16,3 +16,12 @@ D:\资料\ms\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.AssemblyInfo
 D:\资料\ms\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.AssemblyInfo.cs
 D:\资料\ms\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.dll
 D:\资料\ms\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.pdb
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\bin\Debug\netcoreapp2.2\App.Entities.deps.json
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\bin\Debug\netcoreapp2.2\App.Entities.dll
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\bin\Debug\netcoreapp2.2\App.Entities.pdb
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.dll
+C:\Users\Administrator\Desktop\UI\Blog\App.Entities\obj\Debug\netcoreapp2.2\App.Entities.pdb

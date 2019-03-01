@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "ded8e70185c03e15e32b56cd4ca3e3e954345588"
+    "signature": "ae4617679d505993801416c99c2b7b9d7172f2d8"
   },
   "compilationOptions": {},
   "targets": {
@@ -15,8 +15,7 @@
           "NLog": "4.5.11",
           "Newtonsoft.Json": "12.0.1",
           "Snowflake.Core": "2.0.0",
-          "ZKWeb.System.Drawing": "4.0.1",
-          "sqlSugar": "4.9.8.1"
+          "ZKWeb.System.Drawing": "4.0.1"
         },
         "runtime": {
           "App.Common.dll": {}
@@ -836,14 +835,6 @@
           }
         }
       },
-      "sqlSugar/4.9.8.1": {
-        "runtime": {
-          "lib/SqlSugar.dll": {
-            "assemblyVersion": "4.9.8.1",
-            "fileVersion": "4.9.8.1"
-          }
-        }
-      },
       "System.Buffers/4.5.0": {},
       "System.Collections/4.3.0": {
         "dependencies": {
@@ -1615,17 +1606,10 @@
       "path": "snowflake.core/2.0.0",
       "hashPath": "snowflake.core.2.0.0.nupkg.sha512"
     },
-    "sqlSugar/4.9.8.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-suBiDRj2/UeZYFmH3slSoDJOqTsG9S6M7Eja+gRkCprEQcYiU0+f+jEGlCK7+PcQSnfE5/yNDEj58YHjvnxZpQ==",
-      "path": "sqlsugar/4.9.8.1",
-      "hashPath": "sqlsugar.4.9.8.1.nupkg.sha512"
-    },
     "System.Buffers/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xpHYjjtyTEpzMwtSQBWdVc3dPjLdQtvyUg6fBlBqcLl1r2Y7gDG/W/enAYOB98nG3oD3Q153Y2FBO8JDWd+0Xw==",
+      "sha512": "sha512-09yL/QiPEDZI9JLg0R0OcGe/0ycFm69QN16DCvXkqkIorCC1Y2EKwk5KvSlfMmGse+LcKkD3H+Cra7fFkxHXEg==",
       "path": "system.buffers/4.5.0",
       "hashPath": "system.buffers.4.5.0.nupkg.sha512"
     },
@@ -1660,7 +1644,7 @@
     "System.ComponentModel.Annotations/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IjDa643EO77A4CL9dhxfZ6zzGu+pM8Ar0NYPRMN3TvDiga4uGDzFHOj/ArpyNxxKyO5IFT2LZ0rK3kUog7g3jA==",
+      "sha512": "sha512-f1ApUHGWq/lJC8PZE7JqbA3tiY7ZngZQO2mbYfCG0JlQVVUqqmVMAy0fMvAwEuG639M47ELdP6PQxc5OIo6i6A==",
       "path": "system.componentmodel.annotations/4.5.0",
       "hashPath": "system.componentmodel.annotations.4.5.0.nupkg.sha512"
     },
