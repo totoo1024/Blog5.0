@@ -1,4 +1,4 @@
-﻿layui.define(['form', 'layer', 'table', 'jquery'], function (exports) {
+layui.define(['form', 'layer', 'table', 'jquery'], function (exports) {
     var layer = layui.layer, $ = layui.jquery, form = layui.form, table = layui.table;
 
     // 添加响应拦截器
@@ -6,9 +6,8 @@
         // 对响应数据进行处理
         if (result.data.Status == 401) {
             top.location.href = "/Main/Login/Index";
-        } else {
-            return result;
         }
+        return result;
     }, function (error) {
         return Promise.reject(error);
     });
