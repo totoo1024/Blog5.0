@@ -5,8 +5,8 @@
 
 #### 软件架构
 网站使用的是.Net Core 2.2、Redis、Autofac、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（相关操作日志和异常已经记录到数据库，没有做展示页面）
-[博客地址](https://www.miboxapp.com) https://www.miboxapp.com
-[后台地址](https://[输入链接说明](https://www.miboxapp.com/main)) https://www.miboxapp.com/main
+[博客地址](https://www.37czone.com) https://www.37czone.com
+[后台地址](https://[输入链接说明](https://www.37czone.com/main)) https://www.37czone.com/main
 后台登录用户名/密码：root/123456
  :grin: 由于博客已经正式上线，所以只开放了预览权限
 
