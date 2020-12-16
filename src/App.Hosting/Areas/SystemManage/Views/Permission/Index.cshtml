@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-}
+@{ ViewBag.Title = "Index"; }
 @section css{
     <link href="~/css/ztreemetro/metroStyle.css" rel="stylesheet" />
 }
@@ -66,13 +64,14 @@
             };
 
             var key = tools.queryString("key"), t = $("#tree");
+            var zt = $.fn.zTree;
             if (key) {
                 tools.get({
                     url: "/SystemManage/Permission/GetAuthorization?key=" + key,
                     success: function (data) {
                         //初始化树形节点
-                        $.fn.zTree.init(t, setting, data.Tree);
-                        var zTree = $.fn.zTree.getZTreeObj("tree");
+                        zt.init(t, setting, data.Tree);
+                        var zTree = zt.getZTreeObj("tree");
 
                         if (data.Permission) {
                             $("[name=Authorization]").val(data.Permission);
