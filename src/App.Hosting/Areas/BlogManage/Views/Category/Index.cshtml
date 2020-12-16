@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewData["Title"] = "栏目列表";
+}
+<table id="categoryList" lay-filter="categorys"></table>
+
+@section script{
+    <script type="text/javascript">
+        layui.use(['treetable', 'tools', 'laytpl'], function () {
+            var $ = layui.jquery, form = layui.form, laytpl = layui.laytpl;
+            var layer = layui.layer, table = layui.table;
+            var treetable = layui.treetable;
+            var tools = layui.tools;
+
+            // 渲染表格
+            var treeTableInit = function () {
+                layer.load(2);
+                treetable.render({
+                    treeColIndex: 1,
+                    treeSpid: "0",
+                    treeIdName: 'Id',
+                    treePidName: 'ParentId',
+                    elem: '#categoryList',
+                    url: '/BlogManage/Category/Categorys',
+                    toolbar: '#toolsHead',
+                    page: false,
+                    cols: [[
+                        { type: 'numbers' },
+                        {
+                            field: 'CategoryName', title: '栏目名称'
+                        },
+                        {
+                            field: 'EnabledMark', title: '栏目状态', templet: function (d) {
+                                return '<input type="checkbox" name="enabled" lay-filter="enabled" lay-skin="switch" key="' + d.Id + '" lay-text="启用|禁用" ' + (d.EnabledMark ? 'checked' : '') + '>'
+                            }
+                        },
+                        {
+                            field: 'SortCode', title: '排序'
+                        },
+                        { field: 'CreatorTime', title: '创建日期' },
+                        { title: '操作', fixed: 'right', align: 'center', hide: rowButton.length == 0, width: rowButton.length * 80, templet: '#toolsRow' }
+                    ]],
+                    done: function () {
+                        layer.closeAll('loading');
+                    }
+                });
+            };
+
+            treeTableInit();
+
+            table.on('tool(categorys)', function (obj) {
+                var url = $(this).data("url"), layEvent = obj.event;
+                active[layEvent](url, obj.data.Id);
+            });
+            table.on('toolbar(categorys)', function (obj) {
+                var layEvent = obj.event, url = $(this).data("url");
+                active[layEvent](url);
+            });
+
+            form.on('switch(enabled)', function (data) {
+                var _this = $(this), s = data.elem.checked;
+                tools.submitConfrim({
+                    prompt: "您确定需要" + (s ? "启用" : "禁用") + "当前栏目吗？",
+                    url: "/BlogManage/Category/Enable",
+                    data: { id: _this.attr("key"), status: s },
+                    cancelCallBack: true,
+                    success: function (result) {
+                        if (result.StatusCode === 200) {
+                            _this.prop('checked', s);
+                        } else {
+                            _this.prop('checked', !s);
+                        }
+                        form.render("checkbox");
+                    }, cancel: function () {
+                        _this.prop('checked', !s);
+                        form.render("checkbox");
+                    }
+                });
+            });
+
+            var active = {
+                add: function (url) {
+                    tools.moduleOpen({
+                        title: "新增栏目",
+                        url: url,
+                        width: "580px",
+                        height: "450px",
+                        callBack: function (index, layero) {
+                            var iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                data.field.EnabledMark = data.field.EnabledMark == 1 ? true : false;
+                                tools.submit({
+                                    url: url,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        treeTableInit();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                }, edit: function (url, id) {
+                    tools.moduleOpen({
+                        title: "编辑栏目",
+                        url: url + "?key=" + id,
+                        width: "580px",
+                        height: "450px",
+                        callBack: function (index, layero) {
+                            var iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                data.field.EnabledMark = data.field.EnabledMark == 1 ? true : false;
+                                tools.submit({
+                                    url: url + "?Id=" + id,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        treeTableInit();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                }, delete: function (url, id) {
+                    tools.submitConfrim({
+                        prompt: "您确定需要删除当前栏目吗？",
+                        url: url,
+                        data: { key: id },
+                        success: function () {
+                            treeTableInit();//重新加载
+                        }
+                    });
+                }
+            };
+
+            $("a[data-type]").on("click", function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            })
+        })
+    </script>
+}

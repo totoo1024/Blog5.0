@@ -1,0 +1,145 @@
+﻿
+@{ ViewBag.Title = "菜单列表"; }
+<table id="menuList" lay-filter="menuList"></table>
+
+@section script{
+    <script type="text/javascript">
+        layui.use(['treetable', 'tools', 'laytpl'], function () {
+            var $ = layui.jquery, form = layui.form, laytpl = layui.laytpl;
+            var layer = layui.layer, table = layui.table;
+            var treetable = layui.treetable;
+            var tools = layui.tools;
+
+            // 渲染表格
+            var treeTableInit = function () {
+                layer.load(2);
+                treetable.render({
+                    treeColIndex: 1,
+                    treeSpid: "0",
+                    treeIdName: 'Id',
+                    treePidName: 'ParentId',
+                    elem: '#menuList',
+                    url: '/SystemManage/Module/GetMenus',
+                    toolbar: '#toolsHead',
+                    page: false,
+                    cols: [[
+                        { type: 'numbers' },
+                        {
+                            field: 'FullName', title: '菜单名称', templet: function (d) {
+                                return '<i class="' + d.Icon + '"></i>' + d.FullName
+                            }
+                        },
+                        { field: 'EnCode', title: '菜单编码' },
+                        {
+                            field: 'EnabledMark', title: '菜单状态', templet: function (d) {
+                                return '<input type="checkbox" name="enabled" lay-filter="enabled" lay-skin="switch" key="' + d.Id + '" lay-text="启用|禁用" ' + (d.EnabledMark ? 'checked' : '') + '>'
+                            }
+                        },
+                        { field: 'UrlAddress', title: '菜单地址' },
+                        { title: '操作', fixed: 'right', align: 'center', hide: rowButton.length == 0, width: rowButton.length * 80, templet: '#toolsRow' }
+                    ]],
+                    done: function () {
+                        layer.closeAll('loading');
+                    }
+                });
+            };
+
+            treeTableInit();
+
+            table.on('tool(menuList)', function (obj) {
+                var url = $(this).data("url"), layEvent = obj.event;
+                active[layEvent](url, obj.data.Id);
+            });
+            table.on('toolbar(menuList)', function (obj) {
+                var layEvent = obj.event, url = $(this).data("url");
+                active[layEvent](url);
+            });
+
+            form.on('switch(enabled)', function (data) {
+                var _this = $(this), s = data.elem.checked;
+                tools.submitConfrim({
+                    prompt: "您确定需要" + (s ? "启用" : "禁用") + "当前菜单吗？",
+                    url: "/SystemManage/Module/Enable",
+                    data: { id: _this.attr("key"), status: s },
+                    cancelCallBack: true,
+                    success: function (result) {
+                        if (result.StatusCode === 200) {
+                            _this.prop('checked', s);
+                        } else {
+                            _this.prop('checked', !s);
+                        }
+                        form.render("checkbox");
+                    }, cancel: function () {
+                        _this.prop('checked', !s);
+                        form.render("checkbox");
+                    }
+                });
+            });
+
+            var active = {
+                add: function (url) {
+                    tools.moduleOpen({
+                        title: "新增菜单",
+                        url: url,
+                        width: "700px",
+                        height: "660px",
+                        callBack: function (index, layero) {
+                            var iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(SaveMenu)", function (data) {
+                                data.field.EnabledMark = data.field.EnabledMark == 1 ? true : false;
+                                tools.submit({
+                                    url: url,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        treeTableInit();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                }, edit: function (url, id) {
+                    tools.moduleOpen({
+                        title: "编辑菜单",
+                        url: url + "?key=" + id,
+                        width: "700px",
+                        height: "660px",
+                        callBack: function (index, layero) {
+                            let iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(SaveMenu)", function (data) {
+                                data.field.EnabledMark = data.field.EnabledMark == 1 ? true : false;
+                                tools.submit({
+                                    url: url + "?Id=" + id,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        treeTableInit();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                }, delete: function (url, id) {
+                    tools.submitConfrim({
+                        prompt: "您确定需要删除当前菜单吗？",
+                        url: url,
+                        data: { key: id },
+                        success: function () {
+                            treeTableInit();//重新加载
+                        }
+                    });
+                }
+            };
+
+            $("a[data-type]").on("click",
+                function() {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+        })
+    </script>
+}

@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "轮播图列表";
+}
+<table id="laytable" lay-filter="bannerList"></table>
+@section script{
+    <script type="text/javascript">
+        layui.use(["tools", "laytpl"], function () {
+            var $ = layui.$, layer = layui.layer, table = layui.table, tools = layui.tools, form = layui.form, total = 0;
+            table.render({
+                elem: '#laytable',
+                url: '/BlogManage/Banner/Index',
+                method: 'post',
+                toolbar: '#toolsHead',
+                loading: true,
+                height: "full-20",
+                limit: 15,
+                limits: [10, 15, 20, 25, 30, 35, 40, 45, 50],
+                page: true,
+                where: { order: 'SortCode asc' },
+                cols: [[
+                    { type: 'numbers' },
+                    { field: 'Title', title: '标题' },
+                    { field: 'Link', title: '链接地址' },
+                    {
+                        field: 'Target', title: '打开方式', templet: function (d) {
+                            return d.Target == "" ? "<span class='layui-red'>当前页</span>" : "<span class='layui-blue'>新页面</span>";
+                        }
+                    },
+                    {
+                        field: 'ImgUrl', title: '图片', templet: function (d) {
+                            return '<a class="showimg" style="cursor: pointer;" data-img="' + d.ImgUrl + '" title="预览"><i class="fa fa-eye"></i></a>'
+                        }
+                    },
+                    { field: 'SortCode', title: '排序' },
+                    { field: 'CreatorTime', title: '创建日期' },
+                    { title: '操作', fixed: 'right', align: 'center', hide: rowButton.length == 0, width: rowButton.length * 80, templet: '#toolsRow' }
+                ]], done: function (res, curr, count) {
+                    total = count;
+                }
+            });
+
+            $("body").on("click", ".showimg", function () {
+                layer.open({
+                    type: 1,
+                    shade: 0.6,
+                    title: false, //不显示标题
+                    area: ['1170', '360px'],
+                    content: '<img src="' + $(this).attr("data-img") + '" />'
+                });
+            })
+
+            table.on('tool(bannerList)', function (obj) {
+                var url = $(this).data("url"), layEvent = obj.event;
+                active[layEvent](url, obj.data.Id);
+            });
+
+            table.on('toolbar(bannerList)', function (obj) {
+                var url = $(this).data("url");
+                var layEvent = obj.event;
+                active[layEvent](url);
+            });
+
+            var active = {
+                add: function (url) {
+                    tools.moduleOpen({
+                        title: "新增轮播图",
+                        url: url + "?total=" + total,
+                        width: "540px",
+                        height: "400px",
+                        callBack: function (index, layero) {
+                            var iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                tools.submit({
+                                    url: url,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        table.reload("laytable");//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                },
+                edit: function (url, id) {
+                    tools.moduleOpen({
+                        title: "编辑轮播图",
+                        url: url + "?key=" + id,
+                        width: "540px",
+                        height: "400px",
+                        callBack: function (index, layero) {
+                            var iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                tools.submit({
+                                    url: url + "?Id=" + id,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        table.reload("laytable");//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                },
+                delete: function (url, id) {
+                    tools.submitConfrim({
+                        prompt: "您确定需要删除当前轮播图吗？",
+                        url: url,
+                        data: { key: id },
+                        success: function () {
+                            table.reload("laytable");//重新加载
+                        }
+                    });
+                }
+            };
+        });
+    </script>
+}

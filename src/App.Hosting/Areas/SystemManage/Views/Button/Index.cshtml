@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style type="text/css">
+    .treeactive {
+        background-color: #009688;
+        color: #fff;
+    }
+</style>
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-lg2 layui-col-md2">
+        <blockquote class="layui-elem-quote title">菜单结构</blockquote>
+        <ul id="tree"></ul>
+    </div>
+    <div class="layui-col-lg10 layui-col-md10">
+        <table id="buttonList" lay-filter="buttonList"></table>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        var tempId = "0", layTable, total = 0;
+
+        layui.use(['tools', 'tree', 'laytpl'], function () {
+            let $ = layui.$, table = layui.table, form = layui.form, tools = layui.tools;
+            tools.get({
+                url: "/SystemManage/Module/GetAllMenuTree",
+                success: function (data) {
+                    layui.tree({
+                        elem: '#tree' //指定元素
+                        , click: function (item) { //点击节点回调
+                            if (item.id != "0") {
+                                tempId = item.id;
+                                initTable(item.id);
+                            }
+                        }
+                        , nodes: data
+                    });
+                    $("#tree a:gt(0)").click(function() {
+                        $("#tree a").removeClass("treeactive");
+                        $(this).addClass("treeactive");
+                    });
+                }
+            });
+
+            initTable(tempId);
+
+            function initTable(key) {
+                layTable = table.render({
+                    elem: '#buttonList',
+                    url: '/SystemManage/Button/Index?moduleId=' + key,
+                    method: 'post',
+                    toolbar: '#toolsHead',
+                    loading: true,
+                    height: "full-25",
+                    cols: [[
+                        { type: 'numbers' },
+                        { field: 'FullName', title: '按钮名称' },
+                        { field: 'EnCode', title: '按钮编码' },
+                        { field: 'UrlAddress', title: '链接地址', width: 270 },
+                        { field: 'JsEvent', title: '事件' },
+                        { field: 'SortCode', title: '排序' },
+                        {
+                            field: 'Location', title: '位置', templet: function (d) {
+                                switch (d.Location) {
+                                    case 1:
+                                        return "<span class='layui-red'>工具栏</span>";
+                                    case 2:
+                                        return "<span class='layui-blue'>操作栏</span>";
+                                    case 3:
+                                        return "<span class='layui-orange'>数据列</span>";
+                                }
+                            }
+                        },
+                        { title: '操作', fixed: 'right', align: 'center', hide: rowButton.length == 0, width: rowButton.length * 80, templet: '#toolsRow' }
+                    ]], done: function (res, curr, count) {
+                        total = count;
+                    }
+                });
+            }
+
+            table.on('tool(buttonList)', function (obj) {
+                let url = $(this).data("url"), layEvent = obj.event;
+                active[layEvent](url, obj.data.Id);
+            });
+
+            table.on('toolbar(buttonList)', function (obj) {
+                let url = $(this).data("url");
+                let layEvent = obj.event;
+                active[layEvent](url);
+            });
+
+            var active = {
+                add: function (url) {
+                    if (tempId == "0") {
+                        tools.msg("请选择左侧菜单");
+                        return false;
+                    }
+                    tools.moduleOpen({
+                        title: "新增按钮",
+                        url: url + "?total=" + total,
+                        width: "700px",
+                        height: "560px",
+                        callBack: function (index, layero) {
+                            let iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                data.field.SysModuleId = tempId;
+                                tools.submit({
+                                    url: url,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        layTable.reload();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                },
+                edit: function (url, id) {
+                    tools.moduleOpen({
+                        title: "编辑按钮",
+                        url: url + "?key=" + id,
+                        width: "700px",
+                        height: "560px",
+                        callBack: function (index, layero) {
+                            let iframeWindow = window["layui-layer-iframe" + index];
+                            iframeWindow.layui.form.on("submit(save)", function (data) {
+                                tools.submit({
+                                    url: url + "?Id=" + id,
+                                    data: data.field,
+                                    loading: "正在保存数据...",
+                                    success: function () {
+                                        layTable.reload();//重新加载
+                                        layer.close(index);
+                                    }
+                                });
+                            });
+                            layero.find("iframe").contents().find("#btnSave").trigger("click");
+                        }
+                    });
+                },
+                delete: function (url, id) {
+                    tools.submitConfrim({
+                        prompt: "您确定需要删除当前按钮吗？",
+                        url: url,
+                        data: { key: id },
+                        success: function () {
+                            layTable.reload();//重新加载
+                        }
+                    });
+                }
+            };
+        });
+    </script>
+}
+

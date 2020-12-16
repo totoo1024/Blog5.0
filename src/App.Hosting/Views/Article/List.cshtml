@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "文章专栏";
+}
+@section css{
+    <link href="~/web/css/article.css" rel="stylesheet" />
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+}
+<div class="blog-body">
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
+            <a href="/" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
+            @if (ViewBag.CategoryName == null || string.IsNullOrWhiteSpace(ViewBag.CategoryName))
+            {
+                <a><cite>文章专栏</cite></a>
+            }
+            else
+            {
+                <a href="/article/list" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+                <a><cite>@ViewBag.CategoryName</cite></a>
+            }
+
+
+        </blockquote>
+        <div class="blog-main">
+            <div id="parentArticleList" class="blog-main-left animated slideInLeft">
+                <div class="flow-default" id="articlelist">
+
+                </div>
+            </div>
+            <div class="blog-main-right">
+                <div class="blog-search animated fadeInRight">
+                    <div class="layui-form-item">
+                        <div class="search-keywords  shadow">
+                            <input type="text" id="keywords" name="keywords" lay-filter="searchInput" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="search-submit  shadow">
+                            <a class="search-btn" lay-submit="search" lay-filter="search"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-category shadow categoryOut">
+                    <div class="article-category-title" id="category">分类导航</div>
+                    <div class="clear"></div>
+                </div>
+                <!--热门文章-->
+                <div class="layui-tab layui-tab-brief shadow animated fadeInRight blog-module">
+                    <div class="blog-module-title"><i class="layui-icon layui-icon-fire"></i>&nbsp;热门文章</div>
+                    <ul class="hot-list" id="hot"></ul>
+                </div>
+                <div class="category-toggle"><i class="fa fa-chevron-left"></i></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script id="newsview" type="text/template">
+    <div class="article shadow animated zoomIn">
+        <div class="article-left ">
+            <img src="{{d.Thumbnail}}" alt="{{d.Title}}">
+        </div>
+        <div class="article-right">
+            <div class="article-title">
+                {{# if(d.IsTop){}}
+                <span class="article_is_top">置顶</span>&nbsp;
+                {{#} }}
+
+                <span class="article_is_yc">
+                    {{#  if(d.CreativeType == 0){ }}
+                    原创
+                    {{#  }else{ }}
+                    转载
+                    {{#} }}
+                </span>&nbsp;
+                <a href="/article/detail/{{d.Id}}">{{d.Title}}</a>
+            </div>
+            <div class="article-abstract">
+                {{d.Summary}}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="article-footer">
+            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{d.PublishDate}}</span>
+            <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp; {{d.Author}}</span>
+            <span>
+                <i class="fa fa-tag"></i>&nbsp;&nbsp;
+                {{#  layui.each(d.Tags, function(i, curr){}}
+                <a href="/article/list?tid={{curr.TagId}}" class="flag"> {{curr.TagName}}</a>
+                {{#  }); }}
+            </span>
+            <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;{{d.ReadTimes}}</span>
+            <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;{{d.MsgTimes}}</span>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="categoryview">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="/article/list?cid={{item.Id}}">{{item.CategoryName}}</a>
+    {{#  }); }}
+</script>
+<script id="hotview" type="text/template">
+    {{#  layui.each(d, function(index, item){ }}
+    <li>
+        <a href="/article/detail/{{item.Id}}">
+            <img src="{{item.Thumbnail}}" />
+        </a>
+        <div class="hot-right-box">
+            <h4>
+                <a href="/article/detail/{{item.Id}}">{{item.Title}}</a>
+            </h4>
+            <p class="hot-date">
+                <i class="layui-icon layui-icon-date"></i>
+                <a>{{item.PublishDate}}</a>
+            </p>
+            <p class="hot-view">
+                <i class="layui-icon layui-icon-read"></i>
+                <a>{{item.ReadTimes}}</a>
+            </p>
+        </div>
+    </li>
+    {{#  }); }}
+</script>
+@section script{
+    <script src="~/web/js/article.js"></script>
+}
