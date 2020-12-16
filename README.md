@@ -4,34 +4,29 @@
 个人博客网站
 
 #### 软件架构
-升级到.NET Core 5.0
+网站已升级到最新的.NET Core 5.0，已集成Redis、Autofac、Mapster映射、FluentValidation验证组件（支持自带model验证）、集成极验行为验证、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（相关操作日志和异常已经记录到数据库，没有做展示页面）
+相对于2.2版本简化了，日志组件还没有时间集成，以后有时间会补上，站点已经可以正常运行，点击下方地址即可访问
+[博客地址](https://www.37czone.com) https://www.37czone.com
+[后台地址](https://[输入链接说明](https://www.37czone.com/main)) https://www.37czone.com/main
+后台登录用户名/密码：root/123456
+ :grin: 由于博客已经正式上线，所以只开放了预览权限
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 网站使用的sqlsugar ORM开源框架，相关文档请查看官网[sqlsugar框架](http://www.codeisbug.com/)，数据库使用的是mysql，ORM支持7种数据库（MySql、SqlServer、Sqlite、Oracle、Postgresql、达梦、人大金仓），所以可以随意切换，具体请看sqlsugar官网文档
+2. 数据库备份以及脚本放在db目录下，执行任意一项即可，数据库表中仅将所有主键统一成“Id”,项目中后台管理员登录用户名/密码:admin/admin1024
+3. 写代码都有详细注释，这里就不一一介绍
+4. 创建数据库后记得修改appsetting.json文件中的数据库连接字符串
+5. 在Linux部署注意事项，默认是使用的图形验证码，在Linux上部署需要安装相关依赖不然无法正常显示图形验证码，可自行百度解决，图形绘制已经替换为官方的System.Drawing.Common包
+6.项目可以不使用redis， 默认是没有启用redis（默认使用内置缓存）的和极验验证的，需要启用请先安装redis和注册极验的账号，在appsettings.json文件中更改即可使用（注：极验行为验证免费版只支持滑块验证，还有一些其他限制，个人使用已经足够使用）
+7. 日志模块还没有时间完成，以后有时间会补上，有需要可先参考此博客的另外一个版本
+8. 接入QQ授权登录留言评论
 
-#### 参与贡献
+如果有什么BUG还希望大家提交到Issues，我看到会及时修复。
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+前台预览
+![前台预览](https://images.gitee.com/uploads/images/2019/0122/094841_7b096768_967952.png "37℃空间-个人博客.png")
 
+后台预览![后台预览](https://images.gitee.com/uploads/images/2019/0122/095015_2d0d64ad_967952.png "后台管理系统.png")
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
