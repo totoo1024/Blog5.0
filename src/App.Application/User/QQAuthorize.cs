@@ -8,6 +8,7 @@ using App.Framwork.DependencyInjection;
 using App.Framwork.Generate;
 using App.Framwork.Net;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace App.Application.User
@@ -20,9 +21,9 @@ namespace App.Application.User
         private const string KeyPrefix = "lib";
         private readonly QQAuthConfig _config;
 
-        public QQAuthorize(QQAuthConfig config)
+        public QQAuthorize(IOptionsMonitor<QQAuthConfig> config)
         {
-            _config = config;
+            _config = config.CurrentValue;
         }
 
         /// <summary>

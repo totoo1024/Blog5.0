@@ -21,6 +21,7 @@ using EasyCaching.InMemory;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -76,7 +77,7 @@ namespace App.Hosting
 
             #region ª∫¥Ê≈‰÷√
 
-            var sysConfig = services.BuildServiceProvider().GetService<SysConfig>();
+            var sysConfig = services.BuildServiceProvider().GetService<IOptionsMonitor<SysConfig>>().CurrentValue;
             services.AddEasyCaching(options =>
             {
                 //// π”√Œƒµµ https://easycaching.readthedocs.io/en/latest

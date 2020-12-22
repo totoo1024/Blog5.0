@@ -7,6 +7,7 @@ using System.Web;
 using App.Framwork.DependencyInjection;
 using App.Framwork.Encryption;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace App.Framwork.Generate.Geetest
@@ -57,9 +58,9 @@ namespace App.Framwork.Generate.Geetest
         private const string SECCODE = "geetest_seccode";
 
         #endregion
-        public GeetestValidate(GeetestConfig geetestConfig)
+        public GeetestValidate(IOptionsMonitor<GeetestConfig> geetestConfig)
         {
-            _geetestConfig = geetestConfig;
+            _geetestConfig = geetestConfig.CurrentValue;
         }
 
         /// <summary>

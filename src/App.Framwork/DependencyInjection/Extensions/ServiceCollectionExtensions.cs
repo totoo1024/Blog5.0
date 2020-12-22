@@ -5,6 +5,7 @@ using App.Framwork.DependencyInjection.Attributes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace App.Framwork.DependencyInjection.Extensions
 {
@@ -62,38 +63,43 @@ namespace App.Framwork.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// 注入配置
+        /// 注入配置(支持热更新)
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
         public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            var types = Storage.Assemblys.SelectMany(x => x.GetTypes().Where(t => typeof(ISection).IsAssignableFrom(t) && t.IsClass && !t.IsInterface && !t.IsAbstract && !t.IsGenericType));
+            var types = Storage.Assemblys.SelectMany(x => x.GetTypes().Where(t => typeof(IConfig).IsAssignableFrom(t) && t.IsClass && !t.IsInterface && !t.IsAbstract && !t.IsGenericType));
+            var method = typeof(OptionsConfigurationServiceCollectionExtensions).GetMethod(nameof(OptionsConfigurationServiceCollectionExtensions.Configure), new[] { typeof(IServiceCollection), typeof(IConfiguration) });
             foreach (var item in types)
             {
-                var attr = item.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(SectionAttribute)) as SectionAttribute;
-                if (attr == null)
-                {
-                    var config = configuration.GetSection(item.Name).Get(item);
-                    services.AddScoped(config.GetType(), x => config);
-                }
-                else
-                {
-                    var config = configuration.GetSection(attr.Section).Get(item);
-                    switch (attr.Lifetime)
-                    {
-                        case Lifetime.Transient:
-                            services.AddTransient(config.GetType(), x => config);
-                            break;
-                        case Lifetime.Scoped:
-                            services.AddScoped(config.GetType(), x => config);
-                            break;
-                        case Lifetime.Singleton:
-                            services.AddSingleton(config.GetType(), x => config);
-                            break;
-                    }
-                }
+                method?.MakeGenericMethod(item).Invoke(null, new object[] { services, configuration.GetSection(item.Name) });
+
+                //var attr = item.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(SectionAttribute)) as SectionAttribute;
+                //if (attr == null)
+                //{
+
+                //    var config = configuration.GetSection(item.Name).Get(item);
+                //    services.AddScoped(config.GetType(), x => config);
+
+                //}
+                //else
+                //{
+                //    var config = configuration.GetSection(attr.Section).Get(item);
+                //    switch (attr.Lifetime)
+                //    {
+                //        case Lifetime.Transient:
+                //            services.AddTransient(config.GetType(), x => config);
+                //            break;
+                //        case Lifetime.Scoped:
+                //            services.AddScoped(config.GetType(), x => config);
+                //            break;
+                //        case Lifetime.Singleton:
+                //            services.AddSingleton(config.GetType(), x => config);
+                //            break;
+                //    }
+                //}
             }
             return services;
         }

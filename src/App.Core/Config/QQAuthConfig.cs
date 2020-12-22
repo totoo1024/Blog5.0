@@ -5,7 +5,7 @@ namespace App.Core.Config
     /// <summary>
     /// QQ授权登录配置
     /// </summary>
-    public class QQAuthConfig : ISection
+    public class QQAuthConfig : IConfig
     {
         /// <summary>
         /// 应用ID

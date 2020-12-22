@@ -5,7 +5,7 @@ namespace App.Core.Config
     /// <summary>
     /// 系统基础配置
     /// </summary>
-    public class SysConfig : ISection
+    public class SysConfig : IConfig
     {
         /// <summary>
         /// 是否启用redis

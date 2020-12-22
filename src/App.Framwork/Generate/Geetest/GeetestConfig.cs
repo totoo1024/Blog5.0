@@ -7,7 +7,7 @@ namespace App.Framwork.Generate.Geetest
     /// 极验基本配置
     /// </summary>
     [Section("Geetest")]
-    public class GeetestConfig : ISection
+    public class GeetestConfig : IConfig
     {
         /// <summary>
         /// 极验行为验证公钥

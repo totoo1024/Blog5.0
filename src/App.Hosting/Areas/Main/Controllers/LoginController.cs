@@ -11,6 +11,7 @@ using App.Framwork.Result;
 using App.Hosting.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace App.Hosting.Areas.Main.Controllers
@@ -27,11 +28,11 @@ namespace App.Hosting.Areas.Main.Controllers
 
         public LoginController(ISysAccountService sysAccountService,
             IGenerateValidate generateValidate,
-            SysConfig sysConfig)
+            IOptionsMonitor<SysConfig> optionsMonitor)
         {
             _sysAccountService = sysAccountService;
             _generateValidate = generateValidate;
-            _sysConfig = sysConfig;
+            _sysConfig = optionsMonitor.CurrentValue;
         }
         // GET
         public IActionResult Index()
