@@ -71,35 +71,14 @@ namespace App.Framwork.DependencyInjection.Extensions
         public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
             var types = Storage.Assemblys.SelectMany(x => x.GetTypes().Where(t => typeof(IConfig).IsAssignableFrom(t) && t.IsClass && !t.IsInterface && !t.IsAbstract && !t.IsGenericType));
+
+            //通过反射获取泛型方法Configure<TOptions>(IConfiguration);
             var method = typeof(OptionsConfigurationServiceCollectionExtensions).GetMethod(nameof(OptionsConfigurationServiceCollectionExtensions.Configure), new[] { typeof(IServiceCollection), typeof(IConfiguration) });
             foreach (var item in types)
             {
-                method?.MakeGenericMethod(item).Invoke(null, new object[] { services, configuration.GetSection(item.Name) });
-
-                //var attr = item.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(SectionAttribute)) as SectionAttribute;
-                //if (attr == null)
-                //{
-
-                //    var config = configuration.GetSection(item.Name).Get(item);
-                //    services.AddScoped(config.GetType(), x => config);
-
-                //}
-                //else
-                //{
-                //    var config = configuration.GetSection(attr.Section).Get(item);
-                //    switch (attr.Lifetime)
-                //    {
-                //        case Lifetime.Transient:
-                //            services.AddTransient(config.GetType(), x => config);
-                //            break;
-                //        case Lifetime.Scoped:
-                //            services.AddScoped(config.GetType(), x => config);
-                //            break;
-                //        case Lifetime.Singleton:
-                //            services.AddSingleton(config.GetType(), x => config);
-                //            break;
-                //    }
-                //}
+                var attr = item.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(SectionAttribute)) as SectionAttribute;
+                IConfigurationSection section = configuration.GetSection(attr == null ? item.Name : attr.Section);
+                method?.MakeGenericMethod(item).Invoke(null, new object[] { services, section });
             }
             return services;
         }
