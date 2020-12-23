@@ -4,21 +4,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 8001
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /temp
-COPY ["App.Hosting/App.Hosting.csproj", "App.Hosting/"]
-COPY ["App.Application/App.Application.csproj", "App.Application/"]
-COPY ["App.Core/App.Core.csproj", "App.Core/"]
-COPY ["App.Framwork/App.Framwork.csproj", "App.Framwork/"]
-RUN dotnet restore "App.Hosting/App.Hosting.csproj"
-COPY . .
-WORKDIR "/temp/App.Hosting"
-RUN dotnet build "App.Hosting.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "App.Hosting.csproj" -c Release -o /app/publish
-
 FROM base AS final
+RUN mkdir -p /data
+
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "App.Hosting.dll"]
+COPY  . /data
+COPY start.sh /data
+
+RUN chmod +x /data/start.sh
+ENTRYPOINT ["/data/start.sh"]
