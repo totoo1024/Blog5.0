@@ -7,7 +7,7 @@ EXPOSE 8001
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 #COPY ["App.Hosting/App.Hosting.csproj", "App.Hosting/"]
-RUN dotnet restore "App.Hosting/App.Hosting.csproj"
+RUN dotnet restore "App.Hosting.csproj"
 COPY . .
 WORKDIR "/src/App.Hosting"
 RUN dotnet build "App.Hosting.csproj" -c Release -o /app/build
