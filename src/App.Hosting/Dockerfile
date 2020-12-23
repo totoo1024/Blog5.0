@@ -5,14 +5,14 @@ WORKDIR /app
 EXPOSE 8001
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /src
+WORKDIR /temp
 COPY ["App.Hosting/App.Hosting.csproj", "App.Hosting/"]
 COPY ["App.Application/App.Application.csproj", "App.Application/"]
 COPY ["App.Core/App.Core.csproj", "App.Core/"]
 COPY ["App.Framwork/App.Framwork.csproj", "App.Framwork/"]
 RUN dotnet restore "App.Hosting/App.Hosting.csproj"
 COPY . .
-WORKDIR "/src/App.Hosting"
+WORKDIR "/temp/App.Hosting"
 RUN dotnet build "App.Hosting.csproj" -c Release -o /app/build
 
 FROM build AS publish
