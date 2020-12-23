@@ -68,7 +68,6 @@ namespace App.Hosting.Controllers
         /// <returns></returns>
         public IActionResult TimeLine()
         {
-            throw new System.Exception("测试一下");
             return View();
         }
 
