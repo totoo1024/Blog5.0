@@ -15,14 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Program.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="log4net.config" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
@@ -30,16 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.Application\App.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ApplicationDefinition Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </ApplicationDefinition>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Program.cs" />
   </ItemGroup>
 
   <ItemGroup>
