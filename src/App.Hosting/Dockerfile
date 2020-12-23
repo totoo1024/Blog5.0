@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
-EXPOSE 8001
+EXPOSE 81
 
 FROM base AS final
 RUN mkdir -p /data
