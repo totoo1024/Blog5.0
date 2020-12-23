@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using App.Framwork.Log;
 using App.Framwork.Result;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -12,9 +13,12 @@ namespace App.Hosting.Middleware
     public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        public ExceptionHandlerMiddleware(RequestDelegate next)
+        private readonly ILogger _logger;
+
+        public ExceptionHandlerMiddleware(RequestDelegate next, ILogger logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -25,6 +29,7 @@ namespace App.Hosting.Middleware
             }
             catch (Exception ex)
             {
+                _logger.Error("系统异常", ex);
                 if (context.Request.Method.ToLower() == "post" || context.Request.Headers["x-requested-with"] == "XMLHttpRequest")
                 {
                     await ExceptionHandlerAsync(context, ex);
