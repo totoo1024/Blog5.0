@@ -5,7 +5,7 @@ WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /
+WORKDIR /src
 COPY ["src/App.Hosting/App.Hosting.csproj", "App.Hosting/"]
 COPY ["src/App.Application/App.Application.csproj", "App.Application/"]
 COPY ["src/App.Core/App.Core.csproj", "App.Core/"]
