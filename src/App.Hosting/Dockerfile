@@ -10,7 +10,7 @@ COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
 
-RUN dotnet publish "App.Hosting.csproj" -c Release -o /src/publish
+RUN dotnet publish  -c Release -o /src/publish
 
 FROM base AS final
 WORKDIR /app
