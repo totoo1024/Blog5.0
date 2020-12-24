@@ -99,7 +99,7 @@
             //创建一个上传组件
             upload.render({
                 elem: '#upload',
-                url: '/CompanyManag/User/Upload',
+                url: '/UserManage/User/Upload',
                 done: function(res, index, upload) { //上传后的回调
                     if (res.Status == 0) {
                         $("#pic").attr("src", res.Data);
