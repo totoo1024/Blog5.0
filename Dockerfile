@@ -12,7 +12,7 @@ COPY ["src/App.Core/App.Core.csproj", "App.Core/"]
 COPY ["src/App.Framwork/App.Framwork.csproj", "App.Framwork/"]
 RUN dotnet restore "App.Hosting/App.Hosting.csproj"
 COPY . .
-WORKDIR "/src/App.Hosting"
+WORKDIR "/src/src/App.Hosting"
 RUN dotnet build "App.Hosting.csproj" -c Release -o /app/build
 
 FROM build AS publish
