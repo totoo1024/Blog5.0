@@ -6,11 +6,14 @@ EXPOSE 8001
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /App.Hosting
+WORKDIR /
 RUN dotnet restore
+
+FROM build as publish
+WORKDIR /App.Hosting
 RUN dotnet publish -c release -o /app --no-restore
 
 FROM base AS final
 WORKDIR /app
-COPY --from=build /app .
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "App.Hosting.dll"]
