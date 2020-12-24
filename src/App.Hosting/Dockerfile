@@ -2,11 +2,14 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
-EXPOSE 8001
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["App.Hosting/App.Hosting.csproj", "App.Hosting/"]
+COPY ["App.Application/App.Application.csproj", "App.Application/"]
+COPY ["App.Core/App.Core.csproj", "App.Core/"]
+COPY ["App.Framwork/App.Framwork.csproj", "App.Framwork/"]
 RUN dotnet restore "App.Hosting/App.Hosting.csproj"
 COPY . .
 WORKDIR "/src/App.Hosting"
