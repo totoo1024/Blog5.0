@@ -6,7 +6,7 @@ EXPOSE 8001
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /src/publish
+WORKDIR /App.Hosting
 RUN dotnet restore
 RUN dotnet publish -c release -o /app --no-restore
 
