@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Application;
 using App.Application.Blog;
 using App.Application.Blog.Dtos;
 using App.Application.User;
@@ -8,6 +10,7 @@ using App.Core.Entities.Blog;
 using App.Core.Entities.User;
 using App.Framwork.Result;
 using App.Hosting.Extensions;
+using App.Hosting.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -24,6 +27,7 @@ namespace App.Hosting.Controllers
         private readonly INoticeService _noticeService;
         private readonly ITagsService _tagsService;
         private readonly IFriendLinkService _friendLinkService;
+        private readonly ITimeLineService _timeLineService;
 
         public HomeController(IBannerService bannerService,
             IQQUserService qQUserService,
@@ -31,7 +35,8 @@ namespace App.Hosting.Controllers
             IArticleService articleService,
             INoticeService noticeService,
             ITagsService tagsService,
-            IFriendLinkService friendLinkService)
+            IFriendLinkService friendLinkService,
+            ITimeLineService timeLineService)
         {
             _bannerService = bannerService;
             _qQUserService = qQUserService;
@@ -40,6 +45,7 @@ namespace App.Hosting.Controllers
             _noticeService = noticeService;
             _tagsService = tagsService;
             _friendLinkService = friendLinkService;
+            _timeLineService = timeLineService;
         }
 
         #region 视图
@@ -89,6 +95,38 @@ namespace App.Hosting.Controllers
             var tags = await _tagsService.TagsCount();
             var link = await _friendLinkService.GetListCacheAsync(null, o => o.SortCode, false);
             return Json(new { hot, notice, tags, link });
+        }
+
+        /// <summary>
+        /// 时间轴
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public IActionResult Line(PageInputDto page)
+        {
+            var result = _timeLineService.GetListByPage(null, "PublishDate desc", page.Page, page.Limit);
+            var data = result;
+            IEnumerable<int> years = data.Select(s => s.PublishDate.Year).Distinct().OrderByDescending(o => o);
+            List<TimeLineDto> times = new List<TimeLineDto>();
+            foreach (int item in years)
+            {
+                TimeLineDto dto = new TimeLineDto();
+                dto.Year = item;
+                var list = data.Where(c => c.PublishDate.Year == item);
+                IEnumerable<int> months = list.Select(s => s.PublishDate.Month).Distinct().OrderBy(o => o);
+                Dictionary<string, IEnumerable<LineItem>> pairs = new Dictionary<string, IEnumerable<LineItem>>();
+                foreach (int m in months)
+                {
+                    pairs[m.ToString("D2")] = list.Where(c => c.PublishDate.Month == m).Select(s => new LineItem { Content = s.Content, Time = s.PublishDate.ToString("MM月dd日 HH:mm") }).OrderBy(o => o.Time);
+                }
+                dto.Items = pairs;
+                times.Add(dto);
+            }
+            PageOutputDto<List<TimeLineDto>> d = new PageOutputDto<List<TimeLineDto>>();
+            d.code = 0;
+            d.count = data.Pages;
+            d.data = times;
+            return Json(d);
         }
 
         /// <summary>

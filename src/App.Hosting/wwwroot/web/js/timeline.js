@@ -5,8 +5,8 @@ layui.use(['form', 'laytpl', 'flow'], function () {
             elem: '#timeline' //指定列表容器
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
-                $.get('/common/line?page=' + page, function (res) {
-                    if (res.code == 0) {
+                $.get('/home/line?page=' + page, function (res) {
+                    if (res.code === 0) {
                         layui.each(res.data, function (index, item) {
                             var tpl;
                             var $y = $("#y-" + item.Year);
