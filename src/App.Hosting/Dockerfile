@@ -11,7 +11,7 @@ WORKDIR /src
 #COPY ["App.Core/App.Core.csproj", "App.Core/"]
 #COPY ["App.Framwork/App.Framwork.csproj", "App.Framwork/"]
 #RUN dotnet restore "App.Hosting/App.Hosting.csproj"
-COPY . .
+#COPY . .
 #WORKDIR "/src/App.Hosting"
 RUN dotnet build "App.Hosting.csproj" -c Release -o /app/build
 
