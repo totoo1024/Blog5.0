@@ -4,7 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 
 namespace App.Hosting
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
