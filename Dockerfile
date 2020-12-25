@@ -2,8 +2,8 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 #解决图形验证码无法显示问题
-#RUN apt-get update
-#RUN apt-get install libgdiplus -y
+RUN apt-get update
+RUN apt-get install libgdiplus -y
 WORKDIR /app
 EXPOSE 81
 EXPOSE 443
