@@ -217,7 +217,7 @@
                     layer.load(); //上传loading
                 }
                 , done: function (res, index, upload) { //上传后的回调
-                    if (res.Status == 0) {
+                    if (res.StatusCode === 200) {
                         $(".thumbImg").attr("src", res.Data);
                         $("[name='Thumbnail']").val(res.Data);
                         $('.thumbBox').css("background", "#fff");
