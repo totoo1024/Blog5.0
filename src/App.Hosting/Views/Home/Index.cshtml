@@ -1,6 +1,4 @@
-﻿@{
-    ViewBag.Title = "37℃空间-个人博客";
-}
+﻿@{ ViewBag.Title = "37℃空间-个人博客"; }
 @section css{
     <link href="~/web/css/index.css" rel="stylesheet" />
     <link href="~/web/css/blog.css" rel="stylesheet" />
@@ -14,12 +12,11 @@
             <div class="banner" carousel-item="">
                 @foreach (BannerInfo info in Model)
                 {
-                    <div>
-                        <a href="@(string.IsNullOrWhiteSpace(info.Link) ? "javascript:void(0);" : info.Link)">
-                            <img src="@info.ImgUrl" />
-                        </a>
-                    </div>
-                };
+    <div>
+        <a href="@(string.IsNullOrWhiteSpace(info.Link) ? "javascript:void(0);" : info.Link)">
+            <img src="@info.ImgUrl" />
+        </a>
+    </div>};
             </div>
         </div>
     </div>
@@ -89,13 +86,17 @@
                 <span class="article_is_top">置顶</span>&nbsp;
                 {{#} }}
 
+
+                {{#  if(d.CreativeType == 0){ }}
                 <span class="article_is_yc">
-                    {{#  if(d.CreativeType == 0){ }}
                     原创
-                    {{#  }else{ }}
-                    转载
-                    {{#} }}
                 </span>&nbsp;
+                {{#  }else{ }}
+                <span class="article_is_zz">
+                    转载
+                </span>&nbsp;
+                {{#} }}
+
                 <a href="/article/detail/{{d.Id}}">{{d.Title}}</a>
             </div>
             <div class="article-abstract">
