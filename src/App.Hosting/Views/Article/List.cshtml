@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewData["Title"] = "文章专栏";
-}
+@{ ViewData["Title"] = "文章专栏"; }
 @section css{
     <link href="~/web/css/article.css" rel="stylesheet" />
     <link href="~/web/css/blog.css" rel="stylesheet" />
@@ -12,13 +10,11 @@
             <a href="/" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
             @if (ViewBag.CategoryName == null || string.IsNullOrWhiteSpace(ViewBag.CategoryName))
             {
-                <a><cite>文章专栏</cite></a>
-            }
-            else
-            {
-                <a href="/article/list" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
-                <a><cite>@ViewBag.CategoryName</cite></a>
-            }
+<a><cite>文章专栏</cite></a> }
+else
+{
+<a href="/article/list" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+                <a><cite>@ViewBag.CategoryName</cite></a>}
 
 
         </blockquote>
@@ -65,13 +61,17 @@
                 <span class="article_is_top">置顶</span>&nbsp;
                 {{#} }}
 
+
+                {{#  if(d.CreativeType == 0){ }}
                 <span class="article_is_yc">
-                    {{#  if(d.CreativeType == 0){ }}
                     原创
-                    {{#  }else{ }}
-                    转载
-                    {{#} }}
                 </span>&nbsp;
+                {{#  }else{ }}
+                <span class="article_is_zz">
+                    转载
+                </span>&nbsp;
+                {{#} }}
+
                 <a href="/article/detail/{{d.Id}}">{{d.Title}}</a>
             </div>
             <div class="article-abstract">
