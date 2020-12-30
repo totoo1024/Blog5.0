@@ -42,8 +42,6 @@ namespace App.Application.Blog
         {
             bool isAdded = string.IsNullOrEmpty(dto.Id);
             ArticleInfo article = dto.Adapt<ArticleInfo>();
-            List<ArticleCategory> articleCategories = dto.Categories.Select(x => new ArticleCategory { Id = SnowflakeId.NextStringId(), ArticleId = article.Id, CategoryId = x }).ToList();
-            List<ArticleTags> articleTags = dto.Tags.Select(x => new ArticleTags { Id = SnowflakeId.NextStringId(), ArticleId = article.Id, TagsId = x }).ToList();
             if (isAdded)
             {
                 article.Id = SnowflakeId.NextStringId();
@@ -55,6 +53,8 @@ namespace App.Application.Blog
                 await _articleCategoryService.DeleteAsync(x => x.ArticleId == article.Id);
                 await _articleTagsService.DeleteAsync(x => x.ArticleId == article.Id);
             }
+            List<ArticleCategory> articleCategories = dto.Categories.Select(x => new ArticleCategory { Id = SnowflakeId.NextStringId(), ArticleId = article.Id, CategoryId = x }).ToList();
+            List<ArticleTags> articleTags = dto.Tags.Select(x => new ArticleTags { Id = SnowflakeId.NextStringId(), ArticleId = article.Id, TagsId = x }).ToList();
             await _articleCategoryService.InsertAsync(articleCategories);
             await _articleTagsService.InsertAsync(articleTags);
             return true;
