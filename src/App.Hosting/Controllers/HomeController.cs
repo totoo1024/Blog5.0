@@ -194,6 +194,16 @@ namespace App.Hosting.Controllers
         }
 
         /// <summary>
+        /// 友情链接
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Link()
+        {
+            var link = await _friendLinkService.GetListCacheAsync(null, o => o.SortCode, false);
+            return Json(link);
+        }
+
+        /// <summary>
         /// QQ授权登录
         /// </summary>
         /// <returns></returns>

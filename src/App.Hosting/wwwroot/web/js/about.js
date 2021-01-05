@@ -9,7 +9,7 @@ layui.use(['jquery', 'form', 'layedit', 'flow', 'laytpl'], function () {
 
     $(document).ready(function () {
         //友情链接
-        $.get("/common/link", "", function (result) {
+        $.get("/home/link", "", function (result) {
             var getTpl = linkview.innerHTML;
             laytpl(getTpl).render(result, function (html) {
                 $("#link").append(html);
