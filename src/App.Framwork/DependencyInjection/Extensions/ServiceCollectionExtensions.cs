@@ -74,7 +74,7 @@ namespace App.Framwork.DependencyInjection.Extensions
             foreach (var item in types)
             {
                 var attr = item.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == typeof(SectionAttribute)) as SectionAttribute;
-                IConfigurationSection section = configuration.GetSection(attr == null ? item.Name : attr.Section);
+                IConfigurationSection section = configuration.GetSection(attr?.Section ?? item.Name);
                 method?.MakeGenericMethod(item).Invoke(null, new object[] { services, section });
             }
             return services;
