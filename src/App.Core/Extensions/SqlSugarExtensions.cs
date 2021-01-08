@@ -57,10 +57,18 @@ namespace App.Core.Extensions
                     filters.TryAdd(key, item);
                     sqlSugarClient.QueryFilter.Add(item);
                 }
+                else
+                {
+                    filters.TryAdd(key, null);
+                }
             }
             else
             {
-                sqlSugarClient.QueryFilter.Add(filters[key]);
+                if (filters[key] != null)
+                {
+                    sqlSugarClient.QueryFilter.Add(filters[key]);
+                }
+
             }
             return sqlSugarClient.Queryable<TEntity>();
         }
