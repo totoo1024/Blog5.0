@@ -44,31 +44,23 @@ namespace App.Core.Extensions
             //每次先清理过滤器
             sqlSugarClient.QueryFilter.Clear();
             string key = typeof(TEntity).FullName;
-            if (!filters.ContainsKey(key))
+            var filter = filters.GetOrAdd(key, x =>
+              {
+                  if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))
+                  {
+                      string name = nameof(ISoftDelete.DeleteMark);
+                      var item = new SqlFilterItem
+                      {
+                          FilterValue = filter => new SqlFilterResult { Sql = $" {name}=0" },
+                          IsJoinQuery = false
+                      };
+                      return item;
+                  }
+                  return null;
+              });
+            if (filter != null)
             {
-                if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))
-                {
-                    string name = nameof(ISoftDelete.DeleteMark);
-                    var item = new SqlFilterItem
-                    {
-                        FilterValue = filter => new SqlFilterResult { Sql = $" {name}=0" },
-                        IsJoinQuery = false
-                    };
-                    filters.TryAdd(key, item);
-                    sqlSugarClient.QueryFilter.Add(item);
-                }
-                else
-                {
-                    filters.TryAdd(key, null);
-                }
-            }
-            else
-            {
-                if (filters[key] != null)
-                {
-                    sqlSugarClient.QueryFilter.Add(filters[key]);
-                }
-
+                sqlSugarClient.QueryFilter.Add(filter);
             }
             return sqlSugarClient.Queryable<TEntity>();
         }
