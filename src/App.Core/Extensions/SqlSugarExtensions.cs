@@ -39,7 +39,7 @@ namespace App.Core.Extensions
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="sqlSugarClient"></param>
         /// <returns></returns>
-        public static ISugarQueryable<TEntity> QueryFilter<TEntity>(this SqlSugarClient sqlSugarClient) where TEntity : class, new()
+        public static ISugarQueryable<TEntity> QueryFilter<TEntity>(this ISqlSugarClient sqlSugarClient) where TEntity : class, new()
         {
             //每次先清理过滤器
             sqlSugarClient.QueryFilter.Clear();
