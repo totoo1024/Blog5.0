@@ -12,7 +12,7 @@ namespace App.Core.Repository
         /// <summary>
         /// 数据库操作对象
         /// </summary>
-        SqlSugarClient Db { get; }
+        ISqlSugarClient Db { get; }
 
         /// <summary>
         /// 带过滤的查询

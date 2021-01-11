@@ -17,14 +17,14 @@ namespace App.Core.Repository
         /// <summary>
         /// 数据库操作对象
         /// </summary>
-        public SqlSugarClient Db { get; }
+        public ISqlSugarClient Db { get; }
 
         /// <summary>
         /// 查询
         /// </summary>
         public ISugarQueryable<TEntity> SugarQueryable => Db.QueryFilter<TEntity>();
 
-        public AppRepository(SqlSugarClient sqlSugarClient)
+        public AppRepository(ISqlSugarClient sqlSugarClient)
         {
             Db = sqlSugarClient;
         }
@@ -38,7 +38,7 @@ namespace App.Core.Repository
         /// <returns></returns>
         public IInsertable<TEntity> Insertable(TEntity entity)
         {
-            return Db.Insertable<TEntity>(entity);
+            return Db.Insertable(entity);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace App.Core.Repository
         /// <returns></returns>
         public IInsertable<TEntity> Insertable(TEntity[] entities)
         {
-            return Db.Insertable<TEntity>(entities);
+            return Db.Insertable(entities);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace App.Core.Repository
         /// <returns></returns>
         public IInsertable<TEntity> Insertable(List<TEntity> entities)
         {
-            return Db.Insertable<TEntity>(entities);
+            return Db.Insertable(entities);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace App.Core.Repository
         /// <returns></returns>
         public IUpdateable<TEntity> Updateable(TEntity entity)
         {
-            return Db.Updateable<TEntity>(entity);
+            return Db.Updateable(entity);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace App.Core.Repository
         /// <returns></returns>
         public IUpdateable<TEntity> Updateable(List<TEntity> entities)
         {
-            return Db.Updateable<TEntity>(entities);
+            return Db.Updateable(entities);
         }
 
         /// <summary>
