@@ -28,8 +28,11 @@ namespace App.Core.Extensions
                 };
             }
 
-            //var client = new SqlSugarClient(configs);
-            services.AddScoped(x => new SqlSugarClient(configs));
+            //注入SqlSugarClient
+            services.AddScoped<ISqlSugarClient>(x =>
+            {
+                return new SqlSugarClient(configs);
+            });
             //注入泛型仓储
             services.AddScoped(typeof(IAppRepository<>), typeof(AppRepository<>));
             return services;
