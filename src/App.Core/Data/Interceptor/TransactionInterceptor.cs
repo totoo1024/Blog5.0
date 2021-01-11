@@ -28,22 +28,24 @@ namespace App.Core.Data.Interceptor
 
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            var client = context.ServiceProvider.Resolve<SqlSugarClient>();
+            var client = context.ServiceProvider.Resolve<ISqlSugarClient>();
+            //var client = context.ServiceProvider.Resolve<ISqlSugarClient>() as SqlSugarClient;//多数据库使用
             try
             {
-
-                //开启事务
+                //单库开启事务
                 client.Ado.BeginTran(Level);
-
+                //client.BeginTran();//多数据库使用
                 await next(context);
 
-                //提交事务
+                //单库提交事务
                 client.Ado.CommitTran();
+                //client.CommitTran();//多数据库使用
             }
             catch (Exception ex)
             {
-                //提交事务
+                //单库提交事务
                 client.Ado.RollbackTran();
+                //client.RollbackTran();//多数据库使用
                 throw ex;
             }
         }
