@@ -14,10 +14,9 @@ namespace App.Hosting.Areas.SystemManage.Controllers
         private readonly ISysButtonService _sysButtonService;
         private readonly SqlSugarClient _sqlSugarClient;
 
-        public ButtonController(ISysButtonService sysButtonLogic, SqlSugarClient sqlSugarClient)
+        public ButtonController(ISysButtonService sysButtonLogic)
         {
             _sysButtonService = sysButtonLogic;
-            _sqlSugarClient = sqlSugarClient;
         }
         [HttpPost]
         [Description("获取菜单下所有按钮")]
