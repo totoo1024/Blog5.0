@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using App.Application.SysManager;
 using App.Application.SysManager.Dtos;
-using App.Core.Entities.SysManager;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
