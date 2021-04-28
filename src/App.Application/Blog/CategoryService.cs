@@ -32,7 +32,7 @@ namespace App.Application.Blog
             var category = dto.Adapt<CategoryInfo>();
             if (string.IsNullOrWhiteSpace(category.Id))
             {
-                dto.Id = SnowflakeId.NextStringId();
+                category.Id = SnowflakeId.NextStringId();
                 return await InsertRemoveCacheAsync(category);
             }
             else
