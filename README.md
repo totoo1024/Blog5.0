@@ -11,7 +11,7 @@
 
 #### 软件架构
 网站已升级到最新的.NET Core 5.0，已集成Redis、Autofac、Mapster映射、FluentValidation验证组件（支持自带model验证）、集成极验行为验证、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（异常日志只记录在了文件中）
-相对于[.NET Core 2.2](https://gitee.com/miss_you/Blog/tree/master/)版本简化了，日志组件还没有时间集成，以后有时间会补上，站点已经可以正常运行，点击下方地址即可访问
+相对于[.NET Core 2.2](https://gitee.com/miss_you/Blog/tree/master/)版本简化了，日志组件还没有时间集成，以后有时间会补上，站点已经可以正常运行（已经部署在docker中），点击下方地址即可访问
 [博客地址](https://www.37czone.com) https://www.37czone.com
 [后台地址](https://[输入链接说明](https://www.37czone.com/main)) https://www.37czone.com/main
 后台登录用户名/密码：root/123456
