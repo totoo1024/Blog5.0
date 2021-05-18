@@ -7,7 +7,7 @@
 后台预览账号/密码：root/123456（请勿修改密码）
 
 #### 介绍
-个人博客网站 .NET Core 5.0
+博客网站是基于.NET 5.0开发的跨平台Web应用，可以部署在Windows、Linux、docker等多种环境中
 
 #### 软件架构
 网站已升级到最新的.NET Core 5.0，已集成Redis、Autofac、Mapster映射、FluentValidation验证组件（支持自带model验证）、集成极验行为验证、layui开发，由于前端能力有限，所以没有使用前后端分离，博客基本功能已经全部完成（异常日志只记录在了文件中）
