@@ -26,7 +26,7 @@ namespace App.Application.Blog
         public PageOutputDto<List<CommentDto>> MsgList(LeavemsgQueryInputDto dto)
         {
             int total = 0;
-            List<CommentDto> comments = Repository.Db.Queryable<LeavemsgInfo, QQUserinfo>((msg, user) => msg.FromUId == user.Id)
+            List<CommentDto> comments = Repository.Db.Queryable<LeavemsgInfo, QQUserinfo>((msg, user1) => msg.FromUId == user1.Id)
                 .Where(msg => msg.DeleteMark == false && SqlFunc.IsNullOrEmpty(msg.RootId))
                 .WhereIF(SqlFunc.IsNullOrEmpty(dto.Aid), msg => SqlFunc.IsNullOrEmpty(msg.ArticleId))
                 .WhereIF(!SqlFunc.IsNullOrEmpty(dto.Aid), msg => msg.ArticleId == dto.Aid)
