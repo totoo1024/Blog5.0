@@ -1,0 +1,37 @@
+﻿
+@{ ViewData["Title"] = "登录"; }
+@model bool
+<div class="login_face"><img src="~/images/default.png" class="userAvatar"></div>
+<div class="layui-form-item input-item">
+    <label for="userName">用户名</label>
+    <input type="text" placeholder="请输入用户名" autocomplete="off" id="userName" name="userName" class="layui-input" lay-verify="required">
+</div>
+<div class="layui-form-item input-item">
+    <label for="password">密码</label>
+    <input type="password" placeholder="请输入密码" autocomplete="off" id="password" name="password" class="layui-input" lay-verify="required">
+</div>
+@if (!Model)
+{
+<div class="layui-form-item input-item" id="imgCode">
+    <label for="code">验证码</label>
+    <input type="text" placeholder="请输入验证码" autocomplete="off" id="code" maxlength="4" class="layui-input" lay-verify="required">
+    <img id="imgVerifyCode" src="/Main/Login/ValidateCode" onclick="this.src='/Main/Login/ValidateCode?'+Math.random();" />
+</div> }
+else
+{
+<input type="hidden" name="geetest_validate" />
+                <input type="hidden" name="geetest_challenge" />
+                                <input type="hidden" name="geetest_seccode" />
+}
+<div class="layui-form-item">
+    <button class="layui-btn layui-block" id="btnLogin" lay-filter="login" lay-submit>登录</button>
+</div>
+@section script{
+    <script type="text/javascript">
+        var useGeetest =@Model.ToString().ToLower();
+    </script>
+    <!-- 引入 极验官方gt.js，使用其中提供的 initGeetest 初始化函数 -->
+    <script src="https://static.geetest.com/static/tools/gt.js"></script>
+    <script src="@Url.Content("~/js/login.js")"></script>
+}
+

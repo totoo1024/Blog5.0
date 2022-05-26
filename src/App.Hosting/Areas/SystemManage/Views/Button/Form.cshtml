@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">按钮名称</label>
+    <div class="layui-input-block">
+        <input type="text" name="FullName" class="layui-input" lay-verify="required" placeholder="请输入按钮名称">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">事件</label>
+    <div class="layui-input-block">
+        <input type="text" name="JsEvent" class="layui-input" lay-verify="required|en" placeholder="请输入按钮事件">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">位置</label>
+    <div class="layui-input-block">
+        <select name="Location">
+            <option value="1">工具栏</option>
+            <option value="2">操作栏</option>
+            <option value="3">数据列</option>
+        </select>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">请求地址</label>
+    <div class="layui-input-block">
+        <input type="text" name="UrlAddress" class="layui-input" placeholder="请输入请求地址">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">图标</label>
+    <div class="layui-input-block">
+        <input type="text" name="Icon" class="layui-input" placeholder="请选择图标">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item  layui-form-text">
+    <label class="layui-form-label">简介</label>
+    <div class="layui-input-block">
+        <textarea name="Description" placeholder="请输入简介" class="layui-textarea"></textarea>
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="确定" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools;
+
+            let key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/SystemManage/Button/GetForm?key=" + key,
+                    success: function (data) {
+                        form.val("form", data);
+                    }
+                });
+            } else {
+                let total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+        });
+    </script>
+}

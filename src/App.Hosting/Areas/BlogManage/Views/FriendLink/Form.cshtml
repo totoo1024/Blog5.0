@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "添加/编辑友情链接";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">网站名称</label>
+    <div class="layui-input-block">
+        <input type="text" name="SiteName" class="layui-input" lay-verify="required" placeholder="请输入网站名称">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">网站地址</label>
+    <div class="layui-input-block">
+        <input type="text" name="Link" class="layui-input" lay-verify="required" placeholder="请输入链接地址">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">网站LOGO</label>
+    <div class="layui-input-block">
+        <input type="text" name="Logo" class="layui-input" placeholder="请输入网站LOGO链接地址">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools;
+
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/BlogManage/FriendLink/Detail?key=" + key,
+                    success: function (data) {
+                        form.val("form", data);
+                    }
+                });
+            } else {
+                var total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+        });
+    </script>
+}

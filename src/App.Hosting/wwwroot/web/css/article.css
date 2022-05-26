@@ -1,0 +1,122 @@
+﻿/*搜索（移动端不提供此功能）*/
+.search-keywords,
+.search-submit {
+    display: none;
+}
+
+.flag {
+    display: inline-block;
+    margin: 5px 1px;
+    padding: 3px 9px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: bisque;
+}
+
+@media (min-width: 992px) {
+    .blog-search {
+        margin-bottom: 15px;
+    }
+
+    .search-keywords,
+    .search-submit {
+        display: inline-block;
+    }
+
+    .search-keywords {
+        width: 85%;
+        float: left;
+    }
+
+        .search-keywords > input {
+            border-radius: 0;
+        }
+
+    .search-submit {
+        width: 14%;
+        float: right;
+    }
+
+
+
+        .search-submit > .search-btn {
+            display: block;
+            width: 100%;
+            height: 36px;
+            background: #fff;
+            cursor: pointer;
+            float: right;
+            border-radius: 1px;
+            border: 1px solid #e2e2e2;
+        }
+
+            .search-submit > .search-btn:hover {
+                border: 1px solid #d2d2d2;
+            }
+
+            .search-submit > .search-btn i {
+                width: 13px;
+                line-height: 38px;
+                display: block;
+                margin: 0 auto;
+            }
+}
+/*热门文章*/
+.hot-list {
+    padding: 10px;
+}
+
+    .hot-list li {
+        height: 60px;
+        overflow: hidden;
+        border-bottom: 1px dashed #ccc;
+        margin-bottom: 14px;
+        transition: all 0.8s;
+        -moz-transition: all 0.8s;
+        -webkit-transition: all 0.8s;
+        -o-transition: all 0.8s;
+    }
+
+        .hot-list li:hover {
+            padding-left: 30px;
+        }
+
+        .hot-list li > a {
+            float: left;
+        }
+
+        .hot-list li img {
+            height: 46px;
+            width: 46px;
+            padding: 4px;
+        }
+
+.hot-right-box {
+    margin-left: 70px;
+}
+
+    .hot-right-box h4 {
+        font-size: 15px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .hot-right-box .hot-date {
+        display: inline-block;
+        line-height: 38px;
+        font-size: 13px;
+        padding: 0px;
+    }
+
+    .hot-right-box .hot-view {
+        margin-left: 20px;
+        display: inline-block;
+        padding: 0px;
+    }
+
+        .hot-right-box .hot-date i, .hot-right-box .hot-view i {
+            margin-right: 3px;
+            font-size: 13px !important
+        }

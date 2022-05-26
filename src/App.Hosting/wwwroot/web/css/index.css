@@ -1,0 +1,164 @@
+﻿.bg {
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.blog-bg {
+    position: relative;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+    .blog-bg img {
+        width: 100%;
+        height: 100%;
+    }
+
+.banner {
+    border-radius: 20px;
+}
+/*博主信息*/
+.blogerinfo {
+    text-align: center;
+    padding: 0 15px;
+    background: #fff;
+    margin-bottom: 15px;
+}
+
+.blogerinfo-figure {
+    display: inline-block;
+    margin: 20px auto;
+}
+
+    .blogerinfo-figure img {
+        height: 150px;
+        border-radius: 80px;
+    }
+
+.blogerinfo-nickname {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+}
+
+.blogerinfo-introduce {
+    margin: 15px auto;
+    font-size: 18px;
+    width: 90%;
+}
+
+.blogerinfo-location {
+    color: #808080;
+    margin: 15px;
+}
+
+.blogerinfo-contact {
+    padding: 15px;
+    padding-top: 5px;
+}
+
+    .blogerinfo-contact > a {
+        padding: 0 10px;
+    }
+/*博主信息END*/
+
+.flag {
+    display: inline-block;
+    margin: 5px 1px;
+    padding: 3px 9px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: bisque;
+}
+
+/*标签*/
+.tags a {
+    color: #FFFFFF;
+    display: inline-block;
+    margin: 5px 1px;
+    padding: 3px 9px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/*友情链接*/
+.blogroll > li {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2px 5px;
+}
+/*友情链接END*/
+
+/*一路走来和后台记录*/
+.footprint > dt {
+    color: #01AAED;
+}
+
+.footprint > dd {
+    text-indent: 1.3em;
+    padding: 2px 0;
+}
+/*一路走来和后台记录END*/
+
+/*热门文章*/
+.hot-list {
+    padding: 10px;
+}
+
+    .hot-list li {
+        height: 60px;
+        overflow: hidden;
+        border-bottom: 1px dashed #ccc;
+        margin-bottom: 14px;
+        transition: all 0.8s;
+        -moz-transition: all 0.8s;
+        -webkit-transition: all 0.8s;
+        -o-transition: all 0.8s;
+    }
+
+        .hot-list li:hover {
+            padding-left: 30px;
+        }
+
+        .hot-list li > a {
+            float: left;
+        }
+
+        .hot-list li img {
+            height: 46px;
+            width: 46px;
+            padding: 4px;
+        }
+
+.hot-right-box {
+    margin-left: 70px;
+}
+
+    .hot-right-box h4 {
+        font-size: 15px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .hot-right-box .hot-date {
+        display: inline-block;
+        line-height: 38px;
+        font-size: 13px;
+        padding: 0px;
+    }
+
+    .hot-right-box .hot-view {
+        margin-left: 20px;
+        display: inline-block;
+        padding: 0px;
+    }
+
+        .hot-right-box .hot-date i, .hot-right-box .hot-view i {
+            margin-right: 3px;
+            font-size: 13px !important
+        }

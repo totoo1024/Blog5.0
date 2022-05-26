@@ -1,0 +1,178 @@
+﻿
+@{ ViewData["Title"] = "文章详情"; }
+@section css{
+    <link href="~/web/css/detail.css" rel="stylesheet" />
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+}
+@model App.Core.Entities.Blog.ArticleInfo
+<div class="blog-body">
+    <div class="blog-container">
+        <div class="blog-main">
+            <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
+                <a href="/" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
+                <a href="/article/list" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+                <a><cite class="title">@Model.Title</cite></a>
+            </blockquote>
+            <div class="blog-main">
+                <div id="parentArticleList" class="blog-main-left animated slideInLeft">
+                    <div class="article-detail shadow">
+                        <div class="article-detail-title title">@Model.Title</div>
+                        <div class="article-detail-info">
+                            <span>日期：@Model.PublishDate.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                            <span>作者：@Model.Author</span>
+                            @if (Model.CreativeType == App.Core.Share.CreativeType.Reprint)
+                            {
+                <span>来源：<a target="_blank" href="@Model.SourceLink"> @Model.Source</a></span>}
+                            <span>浏览量：@Model.ReadTimes</span>
+                        </div>
+                        <div id="articleContent" style="overflow: hidden;" class="article-detail-content">
+                            @Html.Raw(Model.Content)
+                        </div>
+                    </div>
+                    <div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;">
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0">
+                            <legend>来说两句吧</legend>
+                            <div class="layui-field-box">
+                                <form class="layui-form blog-editor">
+                                    <input type="hidden" id="article" name="aid" value="@Model.Id">
+                                    <div class="layui-form-item">
+                                        <textarea name="content" lay-verify="content" id="remarkEditor" placeholder="请输入内容" class="layui-textarea layui-hide"></textarea>
+                                        @*<div class="layui-layedit">
+                                                <div class="layui-unselect layui-layedit-tool"><i class="layui-icon layedit-tool-face" title="表情" layedit-event="face" "=" "></i><span class="layedit-tool-mid "></span><i class="layui-icon layedit-tool-left " title="左对齐 " lay-command="justifyLeft " layedit-event="left " "=" "></i><i class=" layui-icon layedit-tool-center" title="居中对齐" lay-command="justifyCenter" layedit-event="center" "=" "></i><i class="layui-icon layedit-tool-right " title="右对齐 " lay-command="justifyRight " layedit-event="right " "=" "></i><span class=" layedit-tool-mid"></span><i class="layui-icon layedit-tool-link" title="插入链接" layedit-event="link" "=" "></i></div><div class="layui-layedit-iframe "><iframe id="LAY_layedit_1 " name="LAY_layedit_1 " textarea="remarkEditor " frameborder="0 " style="height: 150px; "></iframe></div>
+                                            </div>*@
+                                    </div>
+                                    <div class="layui-form-item ">
+                                        <button class="layui-btn" lay-submit="formLeaveMessage" lay-filter="formLeaveMessage">提交评论</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </fieldset>
+                        <div class="blog-module-title ">最新评论</div>
+                        <ul class="blog-comment " id="commentList"></ul>
+                    </div>
+                </div>
+                <div class="blog-main-right ">
+                    <div class="category-toggle "><i class="fa fa-chevron-left "></i></div>
+                    <div class="article-category shadow ">
+                        <div class="article-category-title" id="category">分类导航</div>
+                        <div class="clear "></div>
+                    </div>
+                    <div class="blog-module shadow ">
+                        <div class="blog-module-title ">热门文章</div>
+                        <ul class="hot-list" id="hot"></ul>
+                    </div>
+                    <div class="blog-module shadow ">
+                        <div class="blog-module-title ">随便看看</div>
+                        <ul class="blog-module-ul" id="random"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="clear "></div>
+        </div>
+    </div>
+</div>
+<script id="hotview" type="text/template">
+    {{#  layui.each(d, function(index, item){ }}
+    <li>
+        <a href="/article/detail/{{item.Id}}">
+            <img src="{{item.Thumbnail}}" />
+        </a>
+        <div class="hot-right-box">
+            <h4>
+                <a href="/article/detail/{{item.Id}}">{{item.Title}}</a>
+            </h4>
+            <p class="hot-date">
+                <i class="layui-icon layui-icon-date"></i>
+                <a>{{item.PublishDate}}</a>
+            </p>
+            <p class="hot-view">
+                <i class="layui-icon layui-icon-read"></i>
+                <a>{{item.ReadTimes}}</a>
+            </p>
+        </div>
+    </li>
+    {{#  }); }}
+</script>
+<script type="text/template" id="categoryview">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="/article/list?cid={{item.Id}}">{{item.CategoryName}}</a>
+    {{#  }); }}
+</script>
+<script type="text/template" id="randomview">
+    {{#  layui.each(d, function(index, item){ }}
+    <li>
+        <span>
+            <i class="layui-badge-rim layui-bg-red ">{{index+1}}</i>
+        </span>
+        &nbsp;&nbsp;<a href="/article/detail/{{item.Id}}">{{item.Title}}</a>
+    </li>
+    {{#  }); }}
+</script>
+<script type="text/template" id="msgview">
+    <li>
+        <div class="comment-parent">
+            <img src="{{d.Image40}}" alt="{{d.NikeName}}">
+            <div class="info">
+                <span class="username">{{d.NikeName}}</span>
+            </div>
+            <div class="content">
+                {{d.Content}}
+            </div>
+            <p class="info info-footer">
+                <span class="time">{{d.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{{d.Adscription}}</span>&nbsp;&nbsp;
+                <a class="btn-reply" style="color: #009688;font-size:14px;" href="javascript:;" onclick="btnReplyClick(this)">回复</a>
+            </p>
+        </div>
+        <hr>
+        {{# layui.each(d.Reply,function(index,item){ }}
+        <div class="comment-child">
+            <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+            <div class="info">
+                <span class="username">	{{item.FromNikeName}} : </span>
+                {{# if(item.IsMaster){ }}
+                <span class="is_bloger">博主</span>
+                {{# }; }}
+                &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                <span>{{item.Content}}</span>
+            </div>
+            <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+        </div>
+        <hr>
+        {{# }); }}
+        {{# if(d.page>1){ }}
+        <div class="layui-flow-more"><a href="javascript:void(0);" data-rootid="{{d.MsgId}}" data-page="2" data-total="{{d.page}}" onclick="nextpage(this);" style="cursor:pointer;">查看更多回复</a></div>
+        {{# }; }}
+        <!-- 回复表单默认隐藏 -->
+        <div class="replycontainer layui-hide">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <textarea name="content" lay-verify="replyContent" placeholder="回复  @@{{d.NikeName}}:" class="layui-textarea" style="min-height:80px;"></textarea>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-mini" data-rootid="{{d.MsgId}}" data-fromid="{{d.FromUId}}" lay-submit="formReply" lay-filter="formReply">提交</button>
+                </div>
+            </form>
+        </div>
+    </li>
+</script>
+<script type="text/template" id="moreview">
+    {{# layui.each(d,function(index,item){ }}
+    <div class="comment-child">
+        <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+        <div class="info">
+            <span class="username">	{{item.FromNikeName}} : </span>
+            {{# if(item.IsMaster){ }}
+            <span class="is_bloger">博主</span>
+            {{# }; }}
+            &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+            <span>{{item.Content}}</span>
+        </div>
+        <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+    </div>
+    <hr>
+    {{# }); }}
+</script>
+@section script{
+    <script src="@Url.Content("~/web/js/detail.js")"></script>
+}

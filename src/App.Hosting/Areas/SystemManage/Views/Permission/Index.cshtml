@@ -1,0 +1,110 @@
+﻿
+@{ ViewBag.Title = "Index"; }
+@section css{
+    <link href="~/css/ztreemetro/metroStyle.css" rel="stylesheet" />
+}
+<div class="layui-form-item  layui-form-text">
+    <ul id="tree" class="ztree"></ul>
+    <input type="hidden" class="layui-input" name="Authorization" />
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="确定" />
+</div>
+@section script{
+    @*<script src="@Url.Content("~/js/ztree/jquery.ztree.all.min.js")"></script>*@
+    <script type="text/javascript">
+        var jQuery;
+        layui.use(['form', 'tools'],
+            function() {
+                var $ = layui.$, form = layui.form, tools = layui.tools;
+                jQuery = layui.$;
+
+                var new_element = document.createElement("script");
+                new_element.setAttribute("type", "text/javascript");
+                new_element.setAttribute("src", "@Url.Content("~/js/ztree/jquery.ztree.all.min.js")");
+                document.body.appendChild(new_element);
+
+                var setting = {
+                    check: {
+                        chkboxType: { "Y": "ps", "N": "s" },
+                        enable: true
+                    },
+                    view: {
+                        dblClickExpand: false,
+                        showLine: true,
+                        selectedMulti: false
+                    },
+                    data: {
+                        simpleData: {
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "pid",
+                            rootPId: ""
+                        }
+                    },
+                    callback: {
+                        beforeClick: function(treeId, treeNode) {
+                            var zTree = $.fn.zTree.getZTreeObj("tree");
+                            if (treeNode.isParent) {
+                                zTree.expandNode(treeNode);
+                                return false;
+                            }
+                        },
+                        onCheck: function(event, treeId, treeNode) {
+                            var treeObj = $.fn.zTree.getZTreeObj("tree"),
+                                nodes = treeObj.getCheckedNodes(true),
+                                ids = "";
+                            for (var i = 0; i < nodes.length; i++) {
+                                ids += nodes[i].id + ",";
+                            }
+                            if (ids.length > 0) {
+                                ids = ids.substring(0, ids.lastIndexOf(","));
+                            }
+                            $("[name=Authorization]").val(ids);
+                        }
+                    }
+                };
+
+                var key = tools.queryString("key"), t = $("#tree");
+                var zt = $.fn.zTree;
+                if (key) {
+                    tools.get({
+                        url: "/SystemManage/Permission/GetAuthorization?key=" + key,
+                        success: function(data) {
+                            if (zt) {
+                                init(zt, data);
+                            } else {
+                                setTimeout(function () {
+                                    zt = $.fn.zTree;
+                                    init(zt, data);
+                                    },
+                                    50);
+                            }
+
+                        }
+                    });
+                } else {
+                    tools.msg("缺少参数");
+                }
+
+                function init(zt, data) {
+                    //初始化树形节点
+                    zt.init(t, setting, data.Tree);
+                    var zTree = zt.getZTreeObj("tree");
+
+                    if (data.Permission) {
+                        $("[name=Authorization]").val(data.Permission);
+                        //绑定已选中的节点
+                        var arr = data.Permission.split(",");
+                        for (var i = 0; i < arr.length; i++) {
+                            var node = zTree.getNodeByParam("id", arr[i]);
+                            if (node != null) {
+                                zTree.checkNode(node, true);
+                            }
+                        }
+                    }
+                }
+
+            });
+    </script>
+}
