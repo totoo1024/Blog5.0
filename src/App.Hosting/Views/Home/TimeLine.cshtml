@@ -1,0 +1,87 @@
+
+@{
+    ViewData["Title"] = "37度空间-点点滴滴";
+}
+@section css{
+    <link href="~/web/css/timeline.css" rel="stylesheet" />
+}
+<!-- 主体（一般只改变这里的内容） -->
+<div class="blog-body">
+    <!-- 这个一般才是真正的主体内容 -->
+    <input type="hidden" id="path" value="">
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+            <a href="/" title="网站首页">网站首页</a>
+            <a><cite>时光轴</cite></a>
+        </blockquote>
+        <div class="blog-main">
+            <div class="child-nav shadow">
+                <span class="child-nav-btn child-nav-btn-this">时光轴</span>
+                <!--  <span class="child-nav-btn">笔记墙</span> -->
+            </div>
+            <div class="timeline-box shadow">
+                <div class="timeline-main" id="timeline">
+                    <h1><i class="fa fa-clock-o"></i>时光轴<span> —— 记录生活点点滴滴</span></h1>
+                    <div class="timeline-line">
+                    </div>
+                    <!--时光轴内容-->
+                    @*<h1 style="padding-top:4px;padding-bottom:2px;margin-top:40px;"><i class="fa fa-hourglass-end"></i>THE END</h1>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="lineview" type="text/template">
+    <div class="timeline-year" id="y-{{d.Year}}">
+        <h2><a class="yearToggle" href="javascript:;">{{d.Year}}年</a><i class="fa fa-caret-down fa-fw"></i></h2>
+        {{# for(var _month in d.Items){ }}
+        <div class="timeline-month" id="m-{{d.Year}}{{_month}}">
+            <h3 class=" animated fadeInLeft"><a class="monthToggle" href="javascript:;">{{_month}}月</a><i class="fa fa-caret-down fa-fw"></i></h3>
+            <ul>
+                {{# var data=d.Items[_month]; for (var i=0;i<data.length;i++){}}
+                <li>
+                    <div class="h4 animated fadeInLeft">
+                        <p class="date">{{data[i].Time}}</p>
+                    </div>
+                    <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                    <div class="content animated fadeInRight">{{data[i].Content}}</div>
+                    <div class="clear"></div>
+                </li>
+                {{# }; }}
+            </ul>
+        </div>
+        {{# } }}
+    </div>
+</script>
+<script id="monthview" type="text/template">
+    <div class="timeline-month" id="m-{{d.Year}}{{d.Month}}">
+        <h3 class=" animated fadeInLeft"><a class="monthToggle" href="javascript:;">{{d.Month}}月</a><i class="fa fa-caret-down fa-fw"></i></h3>
+        <ul>
+            {{# for(var i=0;i<d.Items.length;i++){ }}
+            <li>
+                <div class="h4 animated fadeInLeft">
+                    <p class="date">{{d.Items[i].Time}}</p>
+                </div>
+                <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                <div class="content animated fadeInRight">{{d.Items[i].Content}}</div>
+                <div class="clear"></div>
+            </li>
+            {{# }; }}
+        </ul>
+    </div>
+</script>
+<script id="dayview" type="text/template">
+    {{# for(var i=0;i<d.length;i++){ }}
+    <li>
+        <div class="h4 animated fadeInLeft">
+            <p class="date">{{d[i].Time}}</p>
+        </div>
+        <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+        <div class="content animated fadeInRight">{{d[i].Content}}</div>
+        <div class="clear"></div>
+    </li>
+    {{# } }}
+</script>
+@section script{
+    <script src="~/web/js/timeline.js"></script>
+}

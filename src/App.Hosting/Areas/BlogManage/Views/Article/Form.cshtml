@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewData["Title"] = "新增/编辑文章";
+}
+@section css{
+    <link href="~/js/kindeditor/themes/default/default.css" rel="stylesheet" />
+    <link href="~/js/kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+    <link href="~/js/selecttags/formSelects-v4.css" rel="stylesheet" />
+}
+
+<div class="layui-col-md9 layui-col-xs12" style="padding-right:5px;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md9 layui-col-xs7">
+            <div class="layui-form-item magt3">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" name="Title" lay-verify="required" placeholder="请输入文章标题">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">内容摘要</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容摘要" class="layui-textarea abstract" lay-verify="required" name="Summary"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3 layui-col-xs5">
+            <div class="layui-upload-list thumbBox mag0 magt3">
+                <img class="layui-upload-img thumbImg" src="/web/images/logo.png">
+                <input type="hidden" value="/web/images/logo.png" name="Thumbnail" />
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item magb0">
+        <label class="layui-form-label">文章内容</label>
+        <div class="layui-input-block">
+            <textarea id="Content" name="Content" class="layui-textarea" cols="100" rows="8" style=" visibility: hidden; width:100%;height:500px;"></textarea>
+        </div>
+    </div>
+</div>
+<div class="layui-col-md3 layui-col-xs12">
+    <blockquote class="layui-elem-quote title"> 发布</blockquote>
+    <div class="border">
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 栏　目</label>
+            <div class="layui-input-block">
+                <select id="selectcategorys" xm-select="categorys" lay-verify="categorys"></select>
+                <input type="hidden" name="Categories" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 标　签</label>
+            <div class="layui-input-block">
+                <select id="selecttags" xm-select="tags" xm-select-max="5" xm-select-search="" lay-verify="tags"></select>
+                <input type="hidden" name="Tags" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 类　型</label>
+            <div class="layui-input-block">
+                <select name="CreativeType">
+                    <option value="0">原创</option>
+                    <option value="1">转载</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">作　者</label>
+            <div class="layui-input-block">
+                <input type="text" name="Author" class="layui-input" lay-verify="required" placeholder="请输入作者名称">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">来　源</label>
+            <div class="layui-input-block">
+                <input type="text" name="Source" class="layui-input" placeholder="请输入来源">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">链　接</label>
+            <div class="layui-input-block">
+                <input type="text" name="SourceLink" class="layui-input" placeholder="请输入来源链接">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 发　布</label>
+            <div class="layui-input-block">
+                <input type="radio" name="release" title="立即发布" lay-skin="primary" lay-filter="release" checked />
+                <input type="radio" name="release" title="定时发布" lay-skin="primary" lay-filter="release" />
+            </div>
+        </div>
+        <div class="layui-form-item layui-hide releaseDate">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="PublishDate" id="PublishDate" placeholder="请选择日期和时间" readonly />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>
+            <div class="layui-input-block">
+                <input type="checkbox" value="1" name="Visible" checked lay-skin="switch" lay-text="ON|OFF">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 置　顶</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="IsTop" value="1" lay-skin="switch" lay-text="ON|OFF">
+            </div>
+        </div>
+        <div class="layui-form-item layui-hide">
+            <input type="hidden" name="CreatorTime" />
+            <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+        </div>
+        @*<hr class="layui-bg-gray" />
+            <div class="layui-right">
+                <a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</a>
+                <a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>
+            </div>*@
+    </div>
+</div>
+@section script{
+    <script src="~/js/kindeditor/kindeditor-all-min.js"></script>
+    <script src="~/js/kindeditor/lang/zh-CN.js"></script>
+    <script src="~/js/kindeditor/plugins/code/prettify.js"></script>
+    <script type="text/javascript">
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#Content', {
+                cssPath: '/js/kindeditor/plugins/code/prettify.css',
+                uploadJson: '/BlogManage/Article/upload',
+                fileManagerJson: '/BlogManage/Article/config',
+                allowFileManager: true,
+            });
+            //将富文本框内容同步到新闻内容文本框
+            setInterval(function () {
+                editor.sync();
+            }, 500);
+        });
+        layui.use(['form', 'laydate', 'upload', 'tools', 'formSelects'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools, laydate = layui.laydate, upload = layui.upload, formSelects = layui.formSelects;
+
+            var key = tools.queryString("key");
+            var parm = [{ url: "/BlogManage/Category/List" }, { url: "/BlogManage/Tags/List" }];
+            tools.requestAll(parm, function (data1, data2) {
+                layui.formSelects.data('categorys', 'local', {
+                    arr: data1
+                });
+                //绑定标签
+                formSelects.data('tags', 'local', {
+                    arr: data2
+                });
+
+                if (key) {
+                    tools.get({
+                        url: "/BlogManage/Article/Detail?key=" + key,
+                        success: function (data) {
+                            data.IsTop = data.IsTop ? 1 : 0;
+                            data.Visible = data.Visible ? 1 : 0;
+                            form.val("form", data);
+                            editor.html(data.Content);
+                            $(".thumbImg").attr("src", data.Thumbnail);
+                            formSelects.value('categorys', data.Categories);
+                            formSelects.value('tags', data.Tags);
+                            if (data.PublishDate == data.CreatorTime) {
+                                $("#PublishDate").val("");
+                            } else {
+                                $("input[name='release']:eq(1)").prop("checked", "checked");
+                                $(".releaseDate").removeClass("layui-hide");
+                                $("#PublishDate").attr("lay-verify", "required");
+                            }
+                            form.render();
+                        }
+                    });
+                }
+            });
+            //栏目选中事件
+            formSelects.on('categorys', function (id, vals, val, isAdd, isDisabled) {
+                //id:           点击select的id
+                //vals:         当前select已选中的值
+                //val:          当前select点击的值
+                //isAdd:        当前操作选中or取消
+                //isDisabled:   当前选项是否是disabled
+
+                //如果return false, 那么将取消本次操作
+                $("[name=Categories]").val(formSelects.value('categorys', 'valStr'));
+            }, true);
+            //栏目选中事件
+            formSelects.on('tags', function (id, vals, val, isAdd, isDisabled) {
+                $("[name='Tags']").val(formSelects.value('tags', 'valStr'));
+            }, true);
+
+            form.on("radio(release)", function (data) {
+                if (data.elem.title == "定时发布") {
+                    $(".releaseDate").removeClass("layui-hide");
+                    $("#PublishDate").attr("lay-verify", "required");
+                } else {
+                    $(".releaseDate").addClass("layui-hide");
+                    $("#PublishDate").removeAttr("lay-verify").val("");
+                }
+            });
+
+            //初始化时间控件
+            laydate.render({
+                elem: '#PublishDate'
+                , type: 'datetime'
+                , trigger: 'click'
+            });
+
+            //上传缩略图
+            upload.render({
+                elem: '.thumbBox',
+                acceptMime: 'image/*'
+                //acceptMime: 'image/jpg, image/png, image/gif'
+                , url: '/BlogManage/Article/Thumbnail'
+                , before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                    layer.load(); //上传loading
+                }
+                , done: function (res, index, upload) { //上传后的回调
+                    if (res.StatusCode === 200) {
+                        $(".thumbImg").attr("src", res.Data);
+                        $("[name='Thumbnail']").val(res.Data);
+                        $('.thumbBox').css("background", "#fff");
+                    } else {
+                        tools.msg(res.Message);
+                    }
+                    layer.closeAll('loading');
+                },
+                size: 500, //最大允许上传的文件大小
+                exts: 'jpg|png|gif'
+            });
+
+            //表单自定义验证
+            form.verify({
+                categorys: function (val) {
+                    if (val == "") {
+                        return "请选择文章栏目";
+                    }
+                },
+                tags: function (val) {
+                    if (val == "") {
+                        return "请选择标签";
+                    }
+                }
+            });
+
+        });
+    </script>
+}

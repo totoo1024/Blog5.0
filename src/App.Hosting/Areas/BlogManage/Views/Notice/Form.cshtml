@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "新增/编辑通知";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">通知链接</label>
+    <div class="layui-input-block">
+        <input type="text" name="Link" class="layui-input" placeholder="请输入通知链接">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">目标</label>
+    <div class="layui-input-block">
+        <select name="Target">
+            <option value="">当前页</option>
+            <option value="_blank">新页面</option>
+        </select>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">通知内容</label>
+    <div class="layui-input-block">
+        <textarea name="Description" class="layui-textarea" lay-verify="required" placeholder="请输入通知内容"></textarea>
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools;
+
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/BlogManage/Notice/Detail?key=" + key,
+                    success: function (data) {
+                        form.val("form", data);
+                    }
+                });
+            } else {
+                var total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+        });
+    </script>
+}
+

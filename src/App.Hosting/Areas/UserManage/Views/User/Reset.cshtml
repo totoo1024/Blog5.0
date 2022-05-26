@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "重置密码";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">新密码</label>
+    <div class="layui-input-block">
+        <input type="password" name="Password" class="layui-input" lay-verify="required|pass" placeholder="请输入新密码">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">确认密码</label>
+    <div class="layui-input-block">
+        <input type="password" name="RePassword" class="layui-input" lay-verify="required|pass" placeholder="请输入确认密码">
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools;
+        });
+    </script>
+}
+

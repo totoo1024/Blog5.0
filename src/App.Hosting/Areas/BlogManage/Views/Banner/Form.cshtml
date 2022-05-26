@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "添加/编辑轮播图";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">标题</label>
+    <div class="layui-input-block">
+        <input type="text" name="Title" class="layui-input" lay-verify="required" placeholder="请输入标题">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">图片</label>
+    <div class="layui-input-block" style="width:50%">
+        <input type="hidden" id="ImgUrl" name="ImgUrl" class="layui-input" lay-verify="required" placeholder="请上传图片">
+        <button type="button" class="layui-btn layui-btn-primary" id="upload"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+        <a title="预览" id="view" style="margin-left:10px;"> <i class="fa fa-info"></i></a>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">链接</label>
+    <div class="layui-input-block">
+        <input type="text" name="Link" class="layui-input" placeholder="请输入链接地址">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">目标</label>
+    <div class="layui-input-block">
+        <select name="Target">
+            <option value="">当前页</option>
+            <option value="_blank">新页面</option>
+        </select>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'tools', 'upload'], function () {
+            var $ = layui.$, layer = layui.layer,
+                form = layui.form, tools = layui.tools, upload = layui.upload;
+
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/BlogManage/Banner/Detail?key=" + key,
+                    success: function (data) {
+                        data.EnabledMark = data.EnabledMark ? 1 : 0;
+                        form.val("form", data);
+                    }
+                });
+            } else {
+                var total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+
+            //创建一个上传组件
+            upload.render({
+                elem: '#upload',
+                acceptMime: 'image/*',
+                url: '/BlogManage/Banner/UploadImg',
+                before: function(obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                    layer.load(); //上传loading
+                },
+                done: function(res, index, upload) { //上传后的回调
+                    if (res.StatusCode === 200) {
+                        $("#ImgUrl").val(res.Data);
+                    } else {
+                        tools.msg(res.Message);
+                    }
+                    layer.closeAll('loading');
+                },
+                size: 2048, //最大允许上传的文件大小
+                exts: 'jpg|png|gif|jpeg'
+            });
+
+            $("#view").click(function() {
+                var src = $("#ImgUrl").val();
+                if (src) {
+                    layer.open({
+                        type: 1,
+                        shade: true,
+                        title: false, //不显示标题
+                        content: '<img width="350px" height="170px" src="' + src + '" />'
+                    });
+                } else {
+                    tools.msg("请先上传图片");
+                }
+            });
+        });
+    </script>
+}
+

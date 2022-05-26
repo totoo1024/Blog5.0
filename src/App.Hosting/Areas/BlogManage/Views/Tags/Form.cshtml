@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "新增/编辑标签";
+}
+<div class="layui-form-item">
+    <label class="layui-form-label">标签名称</label>
+    <div class="layui-input-block">
+        <input type="text" name="TagName" class="layui-input" lay-verify="required" placeholder="请输入标签名称">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">背景颜色</label>
+    <div class="layui-input-block" style="width: 120px;display:inline-block;margin-left:0px">
+        <input type="text" name="BGColor" placeholder="请选择颜色" class="layui-input" lay-verify="required">
+    </div>
+    <div class="layui-inline" style="display:inline-block; margin-bottom:0px">
+        <div id="color" style="margin-bottom:0px;"></div>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="EnabledMark" value="1" lay-skin="switch" lay-text="启用|禁用" checked>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">排序</label>
+    <div class="layui-input-block">
+        <input type="text" name="SortCode" class="layui-input" lay-verify="required|num" placeholder="请输入排序">
+    </div>
+</div>
+<div class="layui-form-item layui-hide">
+    <input type="button" lay-submit id="btnSave" lay-filter="save" value="保存" />
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['form', 'colorpicker', 'tools'], function () {
+            var $ = layui.$,
+                form = layui.form, tools = layui.tools, colorpicker = layui.colorpicker;
+
+            var key = tools.queryString("key");
+
+            if (key) {
+                tools.get({
+                    url: "/BlogManage/Tags/Detail?key=" + key,
+                    success: function (data) {
+                        data.EnabledMark = data.EnabledMark ? 1 : 0;
+                        form.val("form", data);
+                        initColor(data.BGColor);
+                    }
+                });
+            } else {
+                initColor();
+                var total = tools.queryString("total");
+                if (total) {
+                    $("[name=SortCode]").val(parseInt(total) + 1);
+                }
+            }
+
+            function initColor(color) {
+                colorpicker.render({
+                    elem: '#color'
+                    , color: color || '#1c97f5'
+                    , predefine: true
+                    , done: function (color) {
+                        $('[name=BGColor]').val(color);
+                    }
+                });
+            }
+        });
+    </script>
+}
+

@@ -1,0 +1,124 @@
+﻿
+@{ ViewBag.Title = "个人信息"; }
+<div class="layui-input-block layui-red pwdTips"></div>
+<div class="layui-col-md3 layui-col-xs12 user_right">
+    <div class="layui-upload-list">
+        <img id="pic" style="max-height:100px;" class="layui-upload-img layui-circle" src="~/images/default.png">
+    </div>
+    <button type="button" class="layui-btn layui-btn-primary" id="upload"><i class="layui-icon">&#xe67c;</i>上传头像</button>
+</div>
+<div class="layui-col-md6 layui-col-xs12">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="UserName" lay-verify="required" disabled class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色</label>
+        <div class="layui-input-block">
+            <select id="RoleId" name="RoleId" disabled></select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">真实姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="RealName" placeholder="请输入真实姓名" lay-verify="required" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="Gender" value="true" title="男" checked="checked">
+            <input type="radio" name="Gender" value="false" title="女">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">出生日期</label>
+        <div class="layui-input-block">
+            <input type="text" id="Birthday" name="Birthday" placeholder="请输入出生年月" readonly class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号码</label>
+        <div class="layui-input-block">
+            <input type="tel" name="MobilePhone" placeholder="请输入手机号码" lay-verify="phone" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电子邮箱</label>
+        <div class="layui-input-block">
+            <input type="tel" name="Email" placeholder="请输入电子邮箱" lay-verify="email" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">个性签名</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <input type="hidden" id="AccountId" value="@ViewBag.AccountId" />
+    <input type="hidden" name="HeadIcon" id="HeadIcon" />
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="save">立即修改</button>
+        </div>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        layui.use(['laydate', 'tools', 'upload'], function () {
+            var $ = layui.$, form = layui.form, tools = layui.tools, laydate = layui.laydate, upload = layui.upload;
+            var aid = $("#AccountId").val();
+            var parm = [{ url: "/UserManage/User/GetForm?key=" + aid }, { url: "/SystemManage/Role/Select" }];
+            tools.requestAll(parm, function (data1, data2) {
+                tools.renderSelect({
+                    elem: '#RoleId',
+                    text: '请选择角色',
+                    data: data2
+                });
+                $("#pic").attr("src", data1.HeadIcon);
+                $("input[value=" + data1.Gender + "]").prop("checked", "checked");
+                form.val("form", data1);
+            });
+
+            form.on("submit(save)", function (data) {
+                tools.submit({
+                    url: "/Main/Home/Info",
+                    data: data.field,
+                    loading: "正在保存数据...",
+                    success: function () {
+
+                    }
+                });
+                return false;
+            });
+
+            //创建一个上传组件
+            upload.render({
+                elem: '#upload',
+                url: '/UserManage/User/Upload',
+                done: function (res, index, upload) { //上传后的回调
+                    if (res.StatusCode === 200) {
+                        $("#pic").attr("src", res.Data);
+                        $("#HeadIcon").val(res.Data);
+                    } else {
+                        tools.msg(res.Message);
+                    }
+                },
+                accept: 'images', //允许上传的文件类型
+                size: 500, //最大允许上传的文件大小
+                exts: 'jpg|png|gif|jpeg'
+            });
+
+            //选择出生日期
+            laydate.render({
+                elem: '#Birthday',
+                format: 'yyyy-MM-dd',
+                trigger: 'click',
+                max: 0
+            });
+        });
+    </script>
+}
+

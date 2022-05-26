@@ -1,0 +1,29 @@
+
+@{
+    ViewData["Title"] = "37度空间-作品展示";
+}
+@section css{
+    <link href="~/web/css/mixed.css" rel="stylesheet" />
+}
+<!-- 主体（一般只改变这里的内容） -->
+<div class="blog-body">
+    <!-- 这个一般才是真正的主体内容 -->
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+            <a href="/" title="网站首页">网站首页</a>
+            <a><cite>作品展示</cite></a>
+        </blockquote>
+        <div class="blog-main">
+            <div class="child-nav shadow">
+                <span class="child-nav-btn child-nav-btn-this">照片墙</span>
+                <span class="child-nav-btn" onclick="layer.msg('暂未开发');">其他作品</span>
+                <span class="child-nav-btn" onclick="layer.msg('暂未开发');">游戏墙</span>
+            </div>
+            <div class="mixed-main" id="pic"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+@section script{
+    <script src="~/web/js/mixed_pic.js"></script>
+}
